@@ -1,0 +1,193 @@
+{
+  "@context": "https://www.w3.org/ns/dpp/v1",
+  "dpp_uid": "",
+  "dpp_version": "1.0",
+  "created": "",
+  "last_updated": "",
+  "regulation_framework": [
+    "ESPR (UE) 2024/1781",
+    "CPR (UE) 2024/3110",
+    "REACH 1907/2006 art.33",
+    "Reglamento Agua Potable (UE) 2020/2184"
+  ],
+
+  "product": {
+    "commercial_name": "",
+    "product_type": "Sistema de calefaccion por suelo radiante — tuberia multicapa con placa aislante",
+    "brand": "",
+    "model_code": "",
+    "manufacturer": "",
+    "manufacturer_address": "",
+    "manufacturer_country": "",
+    "distributor": "",
+    "gtin": "",
+    "batch": "",
+    "manufacture_date": "",
+    "functional_unit": "1 m2 de suelo radiante instalado, vida util de referencia 50 anos",
+    "cpv_code": "",
+    "images": []
+  },
+
+  "components": [
+    {
+      "id": "tubo",
+      "name": "Tuberia multicapa",
+      "material": "",
+      "barrier": "",
+      "origin": "",
+      "standard": "UNE EN ISO 21003",
+      "mass_kg_per_m2": null,
+      "recycled_content_percent": null,
+      "status": "pending"
+    },
+    {
+      "id": "placa",
+      "name": "Placa aislante",
+      "material": "",
+      "origin": "",
+      "mass_kg_per_m2": null,
+      "recycled_content_percent": null,
+      "status": "pending"
+    },
+    {
+      "id": "colector",
+      "name": "Colector",
+      "material": "",
+      "origin": "",
+      "mass_kg_per_unit": null,
+      "recycled_content_percent": null,
+      "status": "pending"
+    },
+    {
+      "id": "armario",
+      "name": "Armario de empotrar",
+      "material": "",
+      "origin": "",
+      "mass_kg_per_unit": null,
+      "recycled_content_percent": null,
+      "status": "pending"
+    },
+    {
+      "id": "accesorios",
+      "name": "Accesorios de conexion",
+      "material": "",
+      "origin": "",
+      "mass_kg_per_unit": null,
+      "recycled_content_percent": null,
+      "status": "pending"
+    }
+  ],
+
+  "performance_cpr": {
+    "dop_number": "",
+    "dop_url": "",
+    "ce_marking": false,
+    "harmonised_standards": [
+      "UNE EN ISO 21003",
+      "UNE EN ISO 1264"
+    ],
+    "declared_performances": {
+      "temperatura_servicio_max": {
+        "label": "Temperatura maxima de servicio",
+        "value": "",
+        "status": "pending"
+      },
+      "presion_nominal": {
+        "label": "Presion nominal",
+        "value": "",
+        "status": "pending"
+      },
+      "conductividad_termica": {
+        "label": "Conductividad termica",
+        "value": "",
+        "status": "pending"
+      },
+      "permeabilidad_oxigeno": {
+        "label": "Permeabilidad al oxigeno",
+        "value": "",
+        "status": "pending"
+      }
+    },
+    "service_life_years": null,
+    "status": "pending"
+  },
+
+  "epd": {
+    "registration": "",
+    "programme": "",
+    "programme_id": "",
+    "pcr": "PCR 2019:14 Construction products (EN 15804+A2)",
+    "standards": ["ISO 14025", "ISO 14040", "ISO 14044", "EN 15804+A2"],
+    "issue_date": "",
+    "validity": "",
+    "verifier": "",
+    "geographical_scope": "",
+    "lca_practitioner": "",
+    "url": "",
+    "gwp_total": {
+      "value": null,
+      "unit": "kg CO2 eq",
+      "scope": "A1-A3",
+      "per_unit": "1 m2 suelo radiante"
+    },
+    "modules_declared": [],
+    "environmental_indicators": {},
+    "status": "pending"
+  },
+
+  "reach": {
+    "svhc_present": null,
+    "svhc_concentration_above_01": null,
+    "svhc_list_version": "",
+    "substances_checked": [],
+    "scip_notification": "",
+    "last_check": "",
+    "status": "pending"
+  },
+
+  "end_of_life": {
+    "disassembly_instructions": "",
+    "recyclability_percent_by_component": {},
+    "recyclability_total_percent": null,
+    "ler_codes": [],
+    "collection_scheme": "",
+    "status": "pending"
+  },
+
+  "traceability": {
+    "trackline_hash": "",
+    "timestamp_iso8601": "",
+    "eidas_tsa_token": "",
+    "qr_payload_url": "",
+    "data_carrier": "",
+    "data_carrier_location": "",
+    "gs1_digital_link": "",
+    "status": "pending"
+  },
+
+  "actors": {
+    "operator_responsible": "",
+    "distributor": "",
+    "installer": "",
+    "final_owner": "",
+    "market_authority_es": "Ministerio de Industria y Turismo"
+  },
+
+  "registry_art13": {
+    "status": "PENDING_DELEGATED_ACT",
+    "label": "Pendiente acto delegado",
+    "fields_preloaded": ["dpp_uid", "product.commercial_name", "actors.operator_responsible"],
+    "note": "Campo se activara tras publicacion del acto delegado de productos de construccion (previsto 2028-2030)"
+  },
+
+  "block_status": {
+    "A_identification": "pending",
+    "B_materials": "pending",
+    "C_environmental": "pending",
+    "D_technical_performance": "pending",
+    "E_end_of_life": "pending",
+    "F_traceability": "pending",
+    "G_actors": "pending",
+    "H_registry_art13": "pending_ad"
+  }
+}

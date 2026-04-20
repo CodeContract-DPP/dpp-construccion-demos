@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>DPP Construccion — Pasaporte Digital de Producto | Code Contract</title>
+<meta name="description" content="Ejemplo interactivo de Pasaporte Digital de Producto (DPP) para productos de construccion. CPR 2024/3110, ESPR 2024/1781. Por Code Contract.">
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>&#x1F3D7;</text></svg>">
+<style>
+:root {
+  --dark: #1a1a2e;
+  --green: #059669;
+  --green-light: #ecfdf5;
+  --blue: #2563eb;
+  --blue-light: #eff6ff;
+  --amber: #d97706;
+  --amber-light: #fffbeb;
+  --red: #dc2626;
+  --red-light: #fef2f2;
+  --purple: #7c3aed;
+  --purple-light: #f5f3ff;
+  --teal: #0d9488;
+  --teal-light: #f0fdfa;
+  --gray: #6b7280;
+  --gray-light: #f9fafb;
+  --border: #e5e7eb;
+  --bg: #f8fafc;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: #1f2937; line-height: 1.6; }
+
+/* HEADER */
+.header {
+  background: linear-gradient(135deg, #1a1a2e 0%, #1f4e79 100%);
+  color: white; padding: 32px 20px 24px; text-align: center;
+}
+.header h1 { font-size: 24px; font-weight: 800; margin-bottom: 6px; }
+.header p { font-size: 14px; opacity: 0.8; max-width: 600px; margin: 0 auto; }
+.header .badge {
+  display: inline-block; margin-top: 12px;
+  background: rgba(255,255,255,0.15); padding: 4px 14px; border-radius: 20px;
+  font-size: 11px; font-weight: 600; letter-spacing: 0.5px;
+}
+
+/* CONTROLS */
+.controls {
+  max-width: 900px; margin: -16px auto 0; padding: 0 20px; position: relative; z-index: 2;
+}
+.controls-box {
+  background: white; border: 1px solid var(--border); border-radius: 14px;
+  padding: 16px 20px; display: flex; align-items: center; gap: 16px; flex-wrap: wrap;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.control-group { display: flex; align-items: center; gap: 8px; }
+.control-group label { font-size: 12px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.5px; white-space: nowrap; }
+.control-group select {
+  padding: 8px 12px; border: 1px solid var(--border); border-radius: 8px;
+  font-size: 13px; font-weight: 600; background: white; cursor: pointer;
+  min-width: 200px;
+}
+.toggle-btn {
+  display: flex; border: 1px solid var(--border); border-radius: 8px; overflow: hidden;
+}
+.toggle-btn button {
+  padding: 8px 14px; border: none; background: white; font-size: 12px; font-weight: 600;
+  cursor: pointer; transition: all 0.15s; color: var(--gray);
+}
+.toggle-btn button.active { background: var(--blue); color: white; }
+.toggle-btn button:not(:last-child) { border-right: 1px solid var(--border); }
+
+/* STATUS BAR */
+.status-bar {
+  max-width: 900px; margin: 16px auto 0; padding: 0 20px;
+}
+.status-grid {
+  display: grid; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 6px;
+}
+.status-item {
+  text-align: center; padding: 8px 4px; border-radius: 8px; border: 1px solid var(--border);
+  background: white;
+}
+.status-item .status-icon { font-size: 16px; margin-bottom: 2px; }
+.status-item .status-label { font-size: 9px; font-weight: 700; color: var(--gray); text-transform: uppercase; letter-spacing: 0.3px; }
+.status-verified { border-color: var(--green); background: var(--green-light); }
+.status-verified .status-label { color: var(--green); }
+.status-pending { border-color: var(--amber); background: var(--amber-light); }
+.status-pending .status-label { color: var(--amber); }
+.status-pending_ad { border-color: var(--purple); background: var(--purple-light); }
+.status-pending_ad .status-label { color: var(--purple); }
+
+/* CONTAINER */
+.container { max-width: 900px; margin: 0 auto; padding: 24px 20px; }
+
+/* SECTION */
+.section {
+  margin-bottom: 20px; background: white; border-radius: 14px;
+  border: 1px solid var(--border); overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+.section-header {
+  padding: 16px 20px; display: flex; align-items: center; gap: 12px;
+  cursor: pointer; user-select: none;
+}
+.section-header:hover { background: #fafbfc; }
+.section-icon {
+  width: 36px; height: 36px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; flex-shrink: 0; color: white;
+}
+.section-info { flex: 1; }
+.section-info h2 { font-size: 15px; font-weight: 700; }
+.section-info p { font-size: 12px; color: var(--gray); }
+.section-badge {
+  font-size: 9px; font-weight: 700; padding: 3px 8px; border-radius: 8px;
+  text-transform: uppercase; letter-spacing: 0.3px;
+}
+.section-chevron { font-size: 12px; color: var(--gray); transition: transform 0.2s; }
+.section-header.collapsed .section-chevron { transform: rotate(-90deg); }
+.section-body { border-top: 1px solid var(--border); padding: 16px 20px; }
+.section-body.hidden { display: none; }
+
+/* DATA ROWS */
+.data-row {
+  display: flex; padding: 8px 0; border-bottom: 1px solid #f3f4f6;
+  font-size: 13px; gap: 12px;
+}
+.data-row:last-child { border-bottom: none; }
+.data-label { width: 200px; flex-shrink: 0; font-weight: 600; color: #374151; }
+.data-value { flex: 1; color: #4b5563; word-break: break-word; }
+.data-value.empty { color: #d1d5db; font-style: italic; }
+.data-value a { color: var(--blue); text-decoration: none; }
+.data-value a:hover { text-decoration: underline; }
+
+/* COMPONENTS TABLE */
+.comp-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 8px; }
+.comp-table th {
+  text-align: left; padding: 8px 10px; font-weight: 700; color: var(--gray);
+  border-bottom: 2px solid var(--border); font-size: 10px; text-transform: uppercase;
+}
+.comp-table td { padding: 8px 10px; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+.comp-table tr:last-child td { border-bottom: none; }
+
+/* PERFORMANCES */
+.perf-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; margin-top: 8px; }
+.perf-card {
+  border: 1px solid var(--border); border-radius: 10px; padding: 12px;
+  background: var(--gray-light);
+}
+.perf-card .perf-label { font-size: 11px; color: var(--gray); font-weight: 600; }
+.perf-card .perf-value { font-size: 18px; font-weight: 800; color: #1f2937; margin: 4px 0 2px; }
+.perf-card .perf-value.empty { color: #d1d5db; font-size: 14px; }
+.perf-card .perf-standard { font-size: 10px; color: var(--gray); }
+.perf-card .perf-status { font-size: 9px; font-weight: 700; margin-top: 4px; }
+
+/* ENV INDICATORS */
+.env-bar { display: flex; align-items: center; gap: 8px; padding: 6px 0; border-bottom: 1px solid #f3f4f6; }
+.env-bar:last-child { border-bottom: none; }
+.env-bar-label { width: 120px; font-size: 11px; font-weight: 600; color: #374151; flex-shrink: 0; }
+.env-bar-track { flex: 1; height: 20px; background: #f3f4f6; border-radius: 4px; overflow: hidden; position: relative; }
+.env-bar-fill { height: 100%; border-radius: 4px; transition: width 0.5s; min-width: 2px; }
+.env-bar-value { width: 140px; font-size: 11px; font-weight: 600; text-align: right; flex-shrink: 0; }
+.env-bar-negative .env-bar-fill { background: var(--green); }
+.env-bar-positive .env-bar-fill { background: var(--amber); }
+
+/* RECYCLABILITY */
+.recyc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 8px; margin-top: 8px; }
+.recyc-item { text-align: center; padding: 12px; border-radius: 10px; background: var(--gray-light); border: 1px solid var(--border); }
+.recyc-item .recyc-name { font-size: 11px; font-weight: 600; color: var(--gray); margin-bottom: 4px; }
+.recyc-item .recyc-percent { font-size: 22px; font-weight: 800; }
+.recyc-high { color: var(--green); }
+.recyc-mid { color: var(--amber); }
+.recyc-low { color: var(--red); }
+
+/* JSON VIEWER */
+.json-viewer {
+  margin-top: 12px; background: #1e293b; border-radius: 10px; padding: 16px;
+  overflow-x: auto; max-height: 400px; overflow-y: auto;
+}
+.json-viewer pre { color: #e2e8f0; font-size: 11px; font-family: 'Cascadia Code', 'Fira Code', monospace; line-height: 1.5; }
+
+/* FOOTER */
+.footer {
+  max-width: 900px; margin: 0 auto; padding: 20px; text-align: center;
+  font-size: 11px; color: var(--gray); border-top: 1px solid var(--border);
+}
+.footer a { color: var(--blue); text-decoration: none; }
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+  .controls-box { flex-direction: column; align-items: stretch; }
+  .control-group { flex-direction: column; align-items: stretch; }
+  .control-group select { min-width: 100%; }
+  .data-row { flex-direction: column; gap: 2px; }
+  .data-label { width: auto; }
+  .perf-grid { grid-template-columns: 1fr; }
+  .status-grid { grid-template-columns: repeat(4, 1fr); }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>&#x1F3D7; Pasaporte Digital de Producto — Construccion</h1>
+  <p>Ejemplo interactivo de DPP conforme al Reglamento CPR 2024/3110 y ESPR 2024/1781</p>
+  <div class="badge">CPR (UE) 2024/3110 &middot; ESPR (UE) 2024/1781 &middot; Working Plan 2026-2029</div>
+</div>
+
+<div class="controls">
+  <div class="controls-box">
+    <div class="control-group">
+      <label>Producto:</label>
+      <select id="product-select" onchange="loadProduct()">
+        <option value="ventana-aluminio">Ventana abatible aluminio RPT</option>
+        <option value="suelo-radiante">Sistema suelo radiante multicapa</option>
+      </select>
+    </div>
+    <div class="control-group">
+      <label>Version:</label>
+      <div class="toggle-btn">
+        <button id="btn-full" class="active" onclick="setMode('full')">Con datos</button>
+        <button id="btn-empty" onclick="setMode('empty')">Plantilla vacia</button>
+      </div>
+    </div>
+    <div class="control-group" style="margin-left:auto;">
+      <button onclick="toggleJson()" style="padding:8px 14px; border:1px solid var(--border); border-radius:8px; background:white; font-size:12px; font-weight:600; cursor:pointer; color:var(--gray);">{ } Ver JSON-LD</button>
+    </div>
+  </div>
+</div>
+
+<div class="status-bar">
+  <div class="status-grid" id="status-grid"></div>
+</div>
+
+<div class="container" id="dpp-container">
+  <p style="text-align:center; color:var(--gray); padding:40px;">Cargando DPP...</p>
+</div>
+
+<div class="container" id="json-container" style="display:none;">
+  <div class="json-viewer">
+    <pre id="json-raw"></pre>
+  </div>
+</div>
+
+<div class="footer">
+  <p>&copy; 2026 <a href="mailto:adkady@gmail.com">Code Contract</a> &middot; Ejemplo demostrativo &middot; Datos ficticios &middot;
+  <a href="https://codecontract-dpp.github.io/dpp-construccion/">Guia DPP Construccion</a> &middot;
+  <a href="https://codecontract-dpp.github.io/dpp-validator/">Validador DPP</a></p>
+</div>
+
+<script>
+let currentData = null;
+let currentMode = 'full';
+let jsonVisible = false;
+
+const STATUS_LABELS = {
+  A_identification: 'Identificacion',
+  B_materials: 'Materiales',
+  C_environmental: 'Medioambiental',
+  D_technical_performance: 'Prestaciones',
+  E_end_of_life: 'Fin de vida',
+  F_traceability: 'Trazabilidad',
+  G_actors: 'Actores',
+  H_registry_art13: 'Registro Art.13'
+};
+const STATUS_ICONS = {
+  verified: '&#x2705;',
+  partial: '&#x1F7E1;',
+  pending: '&#x1F7E0;',
+  pending_ad: '&#x1F7E3;'
+};
+
+function setMode(mode) {
+  currentMode = mode;
+  document.getElementById('btn-full').classList.toggle('active', mode === 'full');
+  document.getElementById('btn-empty').classList.toggle('active', mode === 'empty');
+  loadProduct();
+}
+
+function toggleJson() {
+  jsonVisible = !jsonVisible;
+  document.getElementById('json-container').style.display = jsonVisible ? 'block' : 'none';
+}
+
+async function loadProduct() {
+  const product = document.getElementById('product-select').value;
+  const suffix = currentMode === 'empty' ? '-empty' : '';
+  const url = `data/${product}${suffix}.json`;
+  try {
+    const resp = await fetch(url);
+    if (!resp.ok) throw new Error('No se pudo cargar ' + url);
+    currentData = await resp.json();
+    render(currentData);
+  } catch (e) {
+    document.getElementById('dpp-container').innerHTML =
+      `<p style="text-align:center;color:var(--red);padding:40px;">Error: ${e.message}<br><small>Asegurate de servir con un servidor local (python -m http.server 8000)</small></p>`;
+  }
+}
+
+function v(val) {
+  if (val === null || val === undefined || val === '' || val === 'PENDING') return '<span class="empty">— sin datos —</span>';
+  if (typeof val === 'boolean') return val ? '&#x2705; Si' : '&#x274C; No';
+  if (Array.isArray(val)) return val.length ? val.join(', ') : '<span class="empty">— sin datos —</span>';
+  return String(val);
+}
+
+function statusBadge(status) {
+  const colors = { verified: 'var(--green)', partial: 'var(--amber)', pending: 'var(--red)', pending_ad: 'var(--purple)' };
+  const labels = { verified: 'Verificado', partial: 'Parcial', pending: 'Pendiente', pending_ad: 'Pendiente AD' };
+  const bg = { verified: 'var(--green-light)', partial: 'var(--amber-light)', pending: 'var(--red-light)', pending_ad: 'var(--purple-light)' };
+  return `<span class="section-badge" style="background:${bg[status]||bg.pending};color:${colors[status]||colors.pending}">${labels[status]||status}</span>`;
+}
+
+function renderStatusBar(bs) {
+  const grid = document.getElementById('status-grid');
+  let html = '';
+  for (const [key, val] of Object.entries(bs)) {
+    const label = STATUS_LABELS[key] || key;
+    const icon = STATUS_ICONS[val] || STATUS_ICONS.pending;
+    html += `<div class="status-item status-${val}"><div class="status-icon">${icon}</div><div class="status-label">${label}</div></div>`;
+  }
+  grid.innerHTML = html;
+}
+
+function render(d) {
+  renderStatusBar(d.block_status || {});
+  document.getElementById('json-raw').textContent = JSON.stringify(d, null, 2);
+
+  const p = d.product || {};
+  const cpr = d.performance_cpr || {};
+  const epd = d.epd || {};
+  const reach = d.reach || {};
+  const eol = d.end_of_life || {};
+  const trace = d.traceability || {};
+  const actors = d.actors || {};
+  const reg = d.registry_art13 || {};
+
+  let html = '';
+
+  // SECTION: Identification
+  html += section('&#x1F4CB;', 'var(--blue)', 'Identificacion del producto', p.product_type || 'Producto de construccion', d.block_status?.A_identification, `
+    ${row('Nombre comercial', p.commercial_name)}
+    ${row('Marca', p.brand)}
+    ${row('Modelo / Codigo', p.model_code)}
+    ${row('Fabricante', p.manufacturer)}
+    ${row('Direccion', p.manufacturer_address)}
+    ${row('Pais', p.manufacturer_country)}
+    ${p.distributor ? row('Distribuidor', p.distributor) : ''}
+    ${row('GTIN', p.gtin)}
+    ${row('Lote', p.batch)}
+    ${p.serial_number ? row('N/S', p.serial_number) : ''}
+    ${row('Fecha fabricacion', p.manufacture_date)}
+    ${p.dimensions ? row('Dimensiones', p.dimensions.width_mm && p.dimensions.height_mm ? `${p.dimensions.width_mm} x ${p.dimensions.height_mm} x ${p.dimensions.depth_mm} mm` : '') : ''}
+    ${p.weight_kg ? row('Peso', p.weight_kg ? p.weight_kg + ' kg' : '') : ''}
+    ${row('Unidad funcional', p.functional_unit)}
+    ${row('DPP UID', d.dpp_uid)}
+    ${row('Marco regulatorio', d.regulation_framework)}
+  `);
+
+  // SECTION: Components
+  html += section('&#x1F9F1;', 'var(--teal)', 'Materiales y componentes', `${(d.components||[]).length} componentes declarados`, d.block_status?.B_materials, `
+    <table class="comp-table">
+      <tr><th>Componente</th><th>Material</th><th>Origen</th><th>Masa</th><th>% Reciclado</th><th>Estado</th></tr>
+      ${(d.components||[]).map(c => `<tr>
+        <td><strong>${c.name||''}</strong>${c.standard ? '<br><span style="font-size:10px;color:var(--gray)">'+c.standard+'</span>' : ''}</td>
+        <td>${v(c.material)}${c.barrier ? '<br><span style="font-size:10px;color:var(--gray)">'+c.barrier+'</span>' : ''}</td>
+        <td>${v(c.origin)}</td>
+        <td>${c.mass_kg ? c.mass_kg+' kg' : c.mass_kg_per_m2 ? c.mass_kg_per_m2+' kg/m²' : c.mass_kg_per_unit ? c.mass_kg_per_unit+' kg/ud' : v('')}</td>
+        <td>${c.recycled_content_percent !== null && c.recycled_content_percent !== undefined ? c.recycled_content_percent+'%' : v('')}</td>
+        <td>${statusBadge(c.status||'pending')}</td>
+      </tr>`).join('')}
+    </table>
+  `);
+
+  // SECTION: Technical Performance
+  const perfs = cpr.declared_performances || {};
+  html += section('&#x1F3AF;', 'var(--amber)', 'Prestaciones tecnicas (CPR)', cpr.harmonised_standard || (cpr.harmonised_standards||[]).join(', ') || 'Norma armonizada', d.block_status?.D_technical_performance, `
+    ${row('DoP', cpr.dop_number)}
+    ${row('Marcado CE', cpr.ce_marking)}
+    ${cpr.notified_body ? row('Organismo notificado', cpr.notified_body) : ''}
+    ${cpr.aenor_certifications_count ? row('Certificaciones AENOR', cpr.aenor_certifications_count) : ''}
+    ${row('Vida util', cpr.service_life_years ? cpr.service_life_years + ' anos' : '')}
+    <div class="perf-grid">
+      ${Object.values(perfs).map(p => `
+        <div class="perf-card">
+          <div class="perf-label">${p.label||''}</div>
+          <div class="perf-value ${!p.value?'empty':''}">${v(p.value)}</div>
+          ${p.standard ? '<div class="perf-standard">'+p.standard+'</div>' : ''}
+          <div class="perf-status">${statusBadge(p.status||'pending')}</div>
+        </div>
+      `).join('')}
+    </div>
+  `);
+
+  // SECTION: Environmental (EPD)
+  const envInd = epd.environmental_indicators || {};
+  html += section('&#x1F33F;', 'var(--green)', 'Datos ambientales (EPD / ACV)', epd.programme || 'Declaracion ambiental', d.block_status?.C_environmental, `
+    ${row('Registro EPD', epd.registration)}
+    ${row('Programa', epd.programme)}
+    ${row('PCR', epd.pcr)}
+    ${row('Fecha emision', epd.issue_date)}
+    ${row('Validez', epd.validity)}
+    ${row('Verificador', epd.verifier)}
+    ${row('Ambito', epd.geographical_scope)}
+    ${row('Modulos declarados', epd.modules_declared)}
+    ${epd.gwp_total && epd.gwp_total.value !== null ? `
+      <div style="margin:12px 0; padding:16px; background:var(--green-light); border-radius:10px; text-align:center;">
+        <div style="font-size:12px; color:var(--green); font-weight:700;">HUELLA DE CARBONO (GWP) — ${epd.gwp_total.scope||'A1-A3'}</div>
+        <div style="font-size:32px; font-weight:800; color:var(--green); margin:4px 0;">${epd.gwp_total.value} <span style="font-size:14px;">${epd.gwp_total.unit}</span></div>
+        <div style="font-size:11px; color:var(--gray);">por ${epd.gwp_total.per_unit}</div>
+      </div>
+    ` : ''}
+    ${Object.keys(envInd).length > 0 ? renderEnvBars(envInd) : ''}
+  `);
+
+  // SECTION: REACH
+  html += section('&#x2697;', 'var(--red)', 'Sustancias quimicas (REACH / SCIP)', 'Art. 33 REACH + CLP', d.block_status?.E_end_of_life ? undefined : d.block_status?.A_identification, `
+    ${row('SVHC presente', reach.svhc_present)}
+    ${row('Concentracion > 0.1%', reach.svhc_concentration_above_01)}
+    ${row('Version lista SVHC', reach.svhc_list_version)}
+    ${row('Sustancias verificadas', reach.substances_checked)}
+    ${row('Notificacion SCIP', reach.scip_notification)}
+    ${row('Ultima comprobacion', reach.last_check)}
+  `);
+
+  // SECTION: End of life
+  html += section('&#x267B;', 'var(--teal)', 'Fin de vida y circularidad', 'Reciclabilidad y desmontaje', d.block_status?.E_end_of_life, `
+    ${row('Instrucciones desmontaje', eol.disassembly_instructions)}
+    ${row('Reciclabilidad total', eol.recyclability_total_percent !== null && eol.recyclability_total_percent !== undefined ? eol.recyclability_total_percent + '%' : '')}
+    ${Object.keys(eol.recyclability_percent_by_component||{}).length > 0 ? `
+      <div class="recyc-grid">
+        ${Object.entries(eol.recyclability_percent_by_component).map(([k, v]) => `
+          <div class="recyc-item">
+            <div class="recyc-name">${k}</div>
+            <div class="recyc-percent ${v >= 80 ? 'recyc-high' : v >= 50 ? 'recyc-mid' : 'recyc-low'}">${v}%</div>
+          </div>
+        `).join('')}
+      </div>
+    ` : ''}
+    ${row('Codigos LER', eol.ler_codes)}
+    ${row('Esquema recogida', eol.collection_scheme)}
+  `);
+
+  // SECTION: Traceability
+  html += section('&#x1F517;', 'var(--purple)', 'Trazabilidad', 'Trackline + GS1 Digital Link', d.block_status?.F_traceability, `
+    ${row('Hash Trackline', trace.trackline_hash)}
+    ${row('Timestamp', trace.timestamp_iso8601)}
+    ${row('Sello TSA (eIDAS)', trace.eidas_tsa_token)}
+    ${row('Data carrier', trace.data_carrier)}
+    ${row('Ubicacion carrier', trace.data_carrier_location)}
+    ${row('GS1 Digital Link', trace.gs1_digital_link ? `<a href="${trace.gs1_digital_link}" target="_blank">${trace.gs1_digital_link}</a>` : '')}
+    ${row('URL QR', trace.qr_payload_url ? `<a href="${trace.qr_payload_url}" target="_blank">${trace.qr_payload_url}</a>` : '')}
+  `);
+
+  // SECTION: Actors
+  html += section('&#x1F465;', 'var(--dark)', 'Actores de la cadena', 'Operador, distribuidor, instalador', d.block_status?.G_actors, `
+    ${row('Operador responsable', actors.operator_responsible)}
+    ${row('Distribuidor', actors.distributor)}
+    ${row('Instalador', actors.installer)}
+    ${row('Propietario final', actors.final_owner)}
+    ${row('Autoridad mercado (ES)', actors.market_authority_es)}
+  `);
+
+  // SECTION: Registry Art.13
+  html += section('&#x1F3DB;', 'var(--purple)', 'Registro UE Art. 13 ESPR', reg.label || 'Registro central europeo', d.block_status?.H_registry_art13, `
+    ${row('Estado', reg.label)}
+    ${row('Campos precargados', reg.fields_preloaded)}
+    ${row('Nota', reg.note)}
+  `);
+
+  document.getElementById('dpp-container').innerHTML = html;
+
+  // Add collapse listeners
+  document.querySelectorAll('.section-header').forEach(h => {
+    h.addEventListener('click', () => {
+      h.classList.toggle('collapsed');
+      h.nextElementSibling.classList.toggle('hidden');
+    });
+  });
+}
+
+function section(icon, color, title, subtitle, status, content) {
+  return `<div class="section">
+    <div class="section-header">
+      <div class="section-icon" style="background:${color}">${icon}</div>
+      <div class="section-info">
+        <h2>${title}</h2>
+        <p>${subtitle||''}</p>
+      </div>
+      ${status ? statusBadge(status) : ''}
+      <span class="section-chevron">&#x25BC;</span>
+    </div>
+    <div class="section-body">${content}</div>
+  </div>`;
+}
+
+function row(label, value) {
+  const rendered = (value === null || value === undefined || value === '' || (Array.isArray(value) && value.length === 0))
+    ? '<span class="empty">— sin datos —</span>'
+    : (typeof value === 'boolean' ? (value ? '&#x2705; Si' : '&#x274C; No') : (Array.isArray(value) ? value.join(', ') : value));
+  return `<div class="data-row"><div class="data-label">${label}</div><div class="data-value">${rendered}</div></div>`;
+}
+
+function renderEnvBars(indicators) {
+  const labels = {
+    gwp_a1_a3: 'GWP A1-A3', gwp_a4: 'GWP A4', gwp_a5: 'GWP A5',
+    gwp_b1_b7: 'GWP B1-B7', gwp_c1_c4: 'GWP C1-C4', gwp_d: 'GWP D (beneficio)',
+    penrt: 'PENRT', pert: 'PERT', adpe: 'ADPE', ap: 'AP', ep: 'EP', odp: 'ODP'
+  };
+  const vals = Object.entries(indicators).filter(([k, v]) => v.value !== null && v.value !== undefined);
+  if (!vals.length) return '';
+  const maxVal = Math.max(...vals.map(([k, v]) => Math.abs(v.value)));
+  return '<div style="margin-top:12px;">' + vals.map(([key, ind]) => {
+    const pct = Math.abs(ind.value) / maxVal * 100;
+    const neg = ind.value < 0;
+    return `<div class="env-bar ${neg ? 'env-bar-negative' : 'env-bar-positive'}">
+      <div class="env-bar-label">${labels[key]||key}</div>
+      <div class="env-bar-track"><div class="env-bar-fill" style="width:${pct}%;background:${neg?'var(--green)':'var(--amber)'}"></div></div>
+      <div class="env-bar-value">${ind.value} ${ind.unit}</div>
+    </div>`;
+  }).join('') + '</div>';
+}
+
+// Init
+loadProduct();
+</script>
+</body>
+</html>
