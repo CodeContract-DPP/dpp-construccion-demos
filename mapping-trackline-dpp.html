@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mapping Trackline ↔ DPP Construcción</title>
+<!-- Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-DKW5YSTNB0"></script>
+<script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-DKW5YSTNB0');</script>
+<style>
+:root {
+  --dark: #1a1a2e;
+  --green: #2e7d4f;
+  --green-light: #e8f5ee;
+  --blue: #2563eb;
+  --blue-light: #eff6ff;
+  --amber: #d97706;
+  --amber-light: #fffbeb;
+  --red: #dc2626;
+  --red-light: #fef2f2;
+  --purple: #7c3aed;
+  --purple-light: #f5f3ff;
+  --gray: #6b7280;
+  --border: #e5e7eb;
+  --bg: #f8fafc;
+  --teal: #0d9488;
+  --teal-light: #ccfbf1;
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: var(--bg); color: #1f2937; line-height: 1.6; }
+
+.header {
+  background: linear-gradient(135deg, var(--dark) 0%, #16423c 100%);
+  color: white; padding: 40px 20px 32px; text-align: center;
+}
+.header h1 { font-size: 26px; font-weight: 800; margin-bottom: 8px; }
+.header p { font-size: 14px; opacity: 0.8; max-width: 700px; margin: 0 auto; }
+.header .reg-badge {
+  display: inline-block; margin-top: 16px;
+  background: rgba(255,255,255,0.15); padding: 6px 16px; border-radius: 20px;
+  font-size: 12px; font-weight: 600; letter-spacing: 0.5px;
+}
+.header .back-link {
+  display: inline-block; margin-top: 12px;
+  color: rgba(255,255,255,0.7); font-size: 12px; text-decoration: none;
+}
+.header .back-link:hover { color: white; }
+
+/* INTRO */
+.intro-bar {
+  max-width: 1100px; margin: -20px auto 0; padding: 0 20px; position: relative; z-index: 2;
+}
+.intro-box {
+  background: white; border: 1px solid var(--border); border-radius: 12px;
+  padding: 20px 24px; box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+.intro-box h3 { font-size: 14px; font-weight: 700; color: var(--dark); margin-bottom: 10px; }
+.intro-box p { font-size: 13px; color: #4b5563; margin-bottom: 8px; }
+.intro-flow {
+  display: flex; align-items: center; gap: 0; flex-wrap: wrap;
+  justify-content: center; margin: 16px 0 8px;
+}
+.flow-step {
+  display: flex; align-items: center; gap: 8px;
+  background: var(--green-light); padding: 8px 14px; border-radius: 8px;
+  font-size: 12px; font-weight: 600; color: var(--green);
+}
+.flow-arrow { font-size: 16px; color: var(--border); padding: 0 6px; }
+
+/* STATS BAR */
+.stats-bar {
+  max-width: 1100px; margin: 16px auto 0; padding: 0 20px;
+  display: flex; gap: 12px; flex-wrap: wrap;
+}
+.stat-card {
+  flex: 1; min-width: 140px; background: white; border-radius: 10px;
+  border: 1px solid var(--border); padding: 14px 16px; text-align: center;
+}
+.stat-num { font-size: 28px; font-weight: 800; }
+.stat-label { font-size: 11px; color: var(--gray); margin-top: 2px; }
+
+/* FILTERS */
+.filters-bar {
+  max-width: 1100px; margin: 20px auto 0; padding: 0 20px;
+  display: flex; gap: 10px; flex-wrap: wrap; align-items: center;
+}
+.filter-label { font-size: 12px; font-weight: 700; color: var(--gray); }
+.filter-btn {
+  font-size: 11px; font-weight: 600; padding: 5px 12px; border-radius: 6px;
+  border: 1px solid var(--border); background: white; cursor: pointer;
+  transition: all 0.15s;
+}
+.filter-btn:hover { background: #f3f4f6; }
+.filter-btn.active { background: var(--dark); color: white; border-color: var(--dark); }
+.filter-search {
+  margin-left: auto; padding: 6px 12px; border: 1px solid var(--border);
+  border-radius: 8px; font-size: 12px; width: 200px;
+}
+
+/* TABLE CONTAINER */
+.container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+/* SECTION */
+.section {
+  margin-bottom: 24px; background: white; border-radius: 14px;
+  border: 1px solid var(--border); overflow: hidden;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+}
+.section-header {
+  padding: 16px 20px; display: flex; align-items: center; gap: 14px;
+  cursor: pointer; user-select: none;
+}
+.section-header:hover { background: #fafbfc; }
+.section-icon {
+  width: 40px; height: 40px; border-radius: 10px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: white; flex-shrink: 0;
+}
+.section-info { flex: 1; }
+.section-info h2 { font-size: 16px; font-weight: 700; }
+.section-info p { font-size: 12px; color: var(--gray); }
+.section-count {
+  font-size: 11px; font-weight: 700; padding: 4px 10px;
+  border-radius: 8px; background: #f3f4f6; color: var(--gray);
+}
+.section-chevron { font-size: 14px; color: var(--gray); transition: transform 0.2s; }
+.section-header.collapsed .section-chevron { transform: rotate(-90deg); }
+.section-body { border-top: 1px solid var(--border); }
+.section-body.hidden { display: none; }
+
+/* MAPPING TABLE */
+.map-table { width: 100%; border-collapse: collapse; font-size: 12px; }
+.map-table th {
+  text-align: left; padding: 8px 12px; font-weight: 700; color: var(--gray);
+  border-bottom: 2px solid var(--border); font-size: 10px; text-transform: uppercase;
+  letter-spacing: 0.5px; background: #fafbfc;
+}
+.map-table td { padding: 10px 12px; border-bottom: 1px solid #f3f4f6; vertical-align: top; }
+.map-table tr:last-child td { border-bottom: none; }
+.map-table tr:hover { background: #fafbfc; }
+.map-table tr[data-hidden="true"] { display: none; }
+.field-name { font-weight: 600; color: #1f2937; font-size: 12px; }
+.field-desc { color: var(--gray); font-size: 11px; margin-top: 2px; }
+
+/* SOURCE BADGES */
+.source-badge {
+  display: inline-block; font-size: 10px; font-weight: 700; padding: 2px 8px;
+  border-radius: 6px; margin: 1px 2px; white-space: nowrap;
+}
+.src-dopc { background: #dbeafe; color: #1d4ed8; }
+.src-epd { background: #d1fae5; color: #065f46; }
+.src-erp { background: #ccfbf1; color: #0d9488; }
+.src-supplier { background: #e9d5ff; color: #6b21a8; }
+.src-lab { background: #fce7f3; color: #be185d; }
+.src-reach { background: #fee2e2; color: #dc2626; }
+.src-manual { background: #f3f4f6; color: #6b7280; }
+.src-datasheet { background: #dbeafe; color: #1d4ed8; }
+
+/* PROVIDER BADGES */
+.prov-badge {
+  display: inline-block; font-size: 10px; font-weight: 600; padding: 2px 8px;
+  border-radius: 6px; margin: 1px 2px; white-space: nowrap;
+}
+.prov-fab { background: var(--blue-light); color: var(--blue); }
+.prov-supplier { background: var(--purple-light); color: var(--purple); }
+.prov-lab { background: #fce7f3; color: #be185d; }
+.prov-lca { background: var(--green-light); color: var(--green); }
+.prov-rcd { background: var(--amber-light); color: var(--amber); }
+
+/* TRACKLINE WORKFLOW */
+.tl-workflow {
+  display: flex; align-items: center; gap: 4px; flex-wrap: wrap;
+}
+.tl-step {
+  font-size: 10px; font-weight: 600; padding: 2px 6px;
+  border-radius: 4px; background: var(--green-light); color: var(--green);
+  white-space: nowrap;
+}
+.tl-arrow { font-size: 10px; color: var(--border); }
+
+/* FOOTER */
+.footer {
+  text-align: center; padding: 24px 20px 40px; font-size: 12px; color: var(--gray);
+}
+.footer a { color: var(--blue); text-decoration: none; }
+
+@media (max-width: 640px) {
+  .header h1 { font-size: 20px; }
+  .stats-bar { flex-direction: column; }
+  .filters-bar { flex-direction: column; }
+  .filter-search { width: 100%; margin-left: 0; }
+  .intro-flow { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); }
+  .map-table { font-size: 11px; }
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <h1>Mapping Trackline &#x2194; DPP Construccion</h1>
+  <p>Correspondencia entre los campos del Pasaporte Digital de Producto para construccion (CPR 2024/3110 + ESPR 2024/1781) y el flujo de trabajo en Trackline</p>
+  <div class="reg-badge">Trackline by Code Contract &middot; CPR 2024/3110 &middot; ESPR 2024/1781 &middot; EN 15804+A2</div>
+  <br><a class="back-link" href="index.html">&#x2190; Volver al visor DPP Construccion</a>
+</div>
+
+<div class="intro-bar">
+  <div class="intro-box">
+    <h3>&#x1F504; Como funciona Trackline para el DPP de Construccion</h3>
+    <p>Trackline orquesta todo el ciclo de datos del DPP de productos de construccion: solicita los documentos normativos necesarios (DoPC, DAP/EPD, declaraciones REACH, fichas tecnicas), extrae y estructura los datos de cada campo, los valida contra el esquema CPR/ESPR, y genera el JSON-LD exportable listo para publicar en el registro Art. 13.</p>
+    <div class="intro-flow">
+      <div class="flow-step">&#x1F4E9; Solicitar documento</div>
+      <div class="flow-arrow">&#x25B6;</div>
+      <div class="flow-step">&#x1F4E5; Recibir / cargar</div>
+      <div class="flow-arrow">&#x25B6;</div>
+      <div class="flow-step">&#x1F50D; Extraer datos</div>
+      <div class="flow-arrow">&#x25B6;</div>
+      <div class="flow-step">&#x2705; Validar</div>
+      <div class="flow-arrow">&#x25B6;</div>
+      <div class="flow-step">&#x1F4BE; Almacenar</div>
+      <div class="flow-arrow">&#x25B6;</div>
+      <div class="flow-step">&#x1F4E4; Exportar JSON-LD</div>
+    </div>
+    <p style="font-size:11px; color:var(--gray); text-align:center; margin-top:8px;">Cada dato queda registrado con su evidencia: quien lo aporto, cuando, y con que documento soporte.</p>
+  </div>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-card"><div class="stat-num" style="color:var(--dark)">72</div><div class="stat-label">Campos DPP totales</div></div>
+  <div class="stat-card"><div class="stat-num" style="color:var(--green)">9</div><div class="stat-label">Secciones</div></div>
+  <div class="stat-card"><div class="stat-num" style="color:var(--amber)">7</div><div class="stat-label">Tipos de documento fuente</div></div>
+  <div class="stat-card"><div class="stat-num" style="color:var(--purple)">5</div><div class="stat-label">Proveedores de datos</div></div>
+</div>
+
+<div class="filters-bar">
+  <span class="filter-label">Filtrar por fuente:</span>
+  <button class="filter-btn active" onclick="filterBy('all')">Todos</button>
+  <button class="filter-btn" onclick="filterBy('dopc')">DoPC</button>
+  <button class="filter-btn" onclick="filterBy('epd')">DAP/EPD</button>
+  <button class="filter-btn" onclick="filterBy('erp')">ERP/Admin</button>
+  <button class="filter-btn" onclick="filterBy('supplier')">Proveedor</button>
+  <button class="filter-btn" onclick="filterBy('lab')">Laboratorio/ON</button>
+  <button class="filter-btn" onclick="filterBy('reach')">REACH/SCIP</button>
+  <button class="filter-btn" onclick="filterBy('manual')">Manual</button>
+  <input type="text" class="filter-search" placeholder="&#x1F50D; Buscar campo..." oninput="searchFields(this.value)">
+</div>
+
+<div class="container">
+
+<!-- ==================== SECTION 1: Identificacion ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:var(--blue)">&#x1F3F7;</div>
+    <div class="section-info">
+      <h2>Identificacion del producto</h2>
+      <p>Datos basicos del fabricante, modelo, identificadores unicos, dimensiones y fechas</p>
+    </div>
+    <span class="section-count">15 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="erp"><td><div class="field-name">dpp_uid</div><div class="field-desc">Identificador unico del pasaporte digital (URN)</div></td><td><span class="source-badge src-erp">Sistema DPP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Auto-generado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">URN + registro</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">product.commercial_name</div><div class="field-desc">Nombre comercial del producto</div></td><td><span class="source-badge src-erp">ERP / Catalogo</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">product.product_type</div><div class="field-desc">Tipo de producto de construccion</div></td><td><span class="source-badge src-erp">ERP / Ficha tecnica</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Clasificar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">product.brand / model_code</div><div class="field-desc">Marca comercial y codigo de modelo</div></td><td><span class="source-badge src-erp">ERP / Catalogo</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">product.manufacturer</div><div class="field-desc">Nombre, direccion y pais del fabricante</div></td><td><span class="source-badge src-erp">Registro mercantil</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">product.gtin</div><div class="field-desc">Codigo GTIN (EAN/UPC) del producto</div></td><td><span class="source-badge src-erp">GS1 / ERP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar GTIN</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">product.batch / serial_number</div><div class="field-desc">Numero de lote y numero de serie</div></td><td><span class="source-badge src-erp">ERP / Produccion</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer S/N</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">product.manufacture_date</div><div class="field-desc">Fecha de fabricacion</div></td><td><span class="source-badge src-erp">ERP / Produccion</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="dopc"><td><div class="field-name">product.dimensions</div><div class="field-desc">Dimensiones: ancho, alto, profundidad (mm)</div></td><td><span class="source-badge src-dopc">DoPC</span><span class="source-badge src-datasheet">Ficha tecnica</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="dopc"><td><div class="field-name">product.weight_kg</div><div class="field-desc">Peso del producto (kg)</div></td><td><span class="source-badge src-dopc">DoPC</span><span class="source-badge src-datasheet">Ficha tecnica</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">product.functional_unit</div><div class="field-desc">Unidad funcional y vida util de referencia</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">product.cpv_code</div><div class="field-desc">Codigo CPV (vocabulario comun de contratos publicos)</div></td><td><span class="source-badge src-erp">Clasificacion oficial</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Clasificar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">dpp_version</div><div class="field-desc">Version del pasaporte digital</div></td><td><span class="source-badge src-erp">Sistema DPP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Auto-generado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Control versiones</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">created / last_updated</div><div class="field-desc">Fecha de creacion y ultima actualizacion del DPP</div></td><td><span class="source-badge src-erp">Sistema DPP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Auto-generado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Timestamp ISO 8601</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">regulation_framework</div><div class="field-desc">Marco normativo aplicable (ESPR, CPR, REACH, CLP, Ley 7/2022, CTE)</div></td><td><span class="source-badge src-erp">Analisis normativo</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Identificar normas</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Asociar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== SECTION 2: Materiales ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:var(--purple)">&#x2697;</div>
+    <div class="section-info">
+      <h2>Materiales y componentes</h2>
+      <p>Composicion por componente, materiales, origen, contenido reciclado, proveedores</p>
+    </div>
+    <span class="section-count">9 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="supplier"><td><div class="field-name">components[].name</div><div class="field-desc">Nombre del componente (marco, vidrio, herrajes, juntas, sellado...)</div></td><td><span class="source-badge src-supplier">Ficha tecnica proveedor</span></td><td><span class="prov-badge prov-fab">Fabricante</span><span class="prov-badge prov-supplier">Proveedor MP</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar a proveedor</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="supplier"><td><div class="field-name">components[].material</div><div class="field-desc">Material principal (aleacion, vidrio float, EPDM, acero inoxidable...)</div></td><td><span class="source-badge src-supplier">Ficha tecnica proveedor</span><span class="source-badge src-datasheet">Datasheet</span></td><td><span class="prov-badge prov-supplier">Proveedor MP</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar a proveedor</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="supplier"><td><div class="field-name">components[].origin</div><div class="field-desc">Pais de origen del componente (codigo ISO)</div></td><td><span class="source-badge src-supplier">Declaracion proveedor</span></td><td><span class="prov-badge prov-supplier">Proveedor MP</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar declaracion</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer pais</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="supplier"><td><div class="field-name">components[].mass_kg</div><div class="field-desc">Masa del componente (kg)</div></td><td><span class="source-badge src-supplier">Ficha tecnica</span><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar suma</span></div></td></tr>
+        <tr data-source="supplier"><td><div class="field-name">components[].recycled_content_percent</div><div class="field-desc">Porcentaje de contenido reciclado por componente</div></td><td><span class="source-badge src-supplier">Declaracion proveedor</span><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-supplier">Proveedor MP</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar certificado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer %</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="lab"><td><div class="field-name">components[].standard</div><div class="field-desc">Norma aplicable (UNE-EN 14024, UNE-EN 1279, UNE-EN 13126...)</div></td><td><span class="source-badge src-lab">Informe ensayo</span><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Identificar norma</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar conformidad</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="supplier"><td><div class="field-name">components[].supplier</div><div class="field-desc">Nombre del proveedor del componente</div></td><td><span class="source-badge src-supplier">Declaracion proveedor</span><span class="source-badge src-erp">ERP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="supplier"><td><div class="field-name">components[].u_value_center_glass</div><div class="field-desc">Valor U centro vidrio (solo acristalamiento, W/m2K)</div></td><td><span class="source-badge src-supplier">Ficha tecnica vidrio</span><span class="source-badge src-lab">Ensayo</span></td><td><span class="prov-badge prov-supplier">Proveedor vidrio</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar a proveedor</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">components[].status</div><div class="field-desc">Estado de verificacion del componente</div></td><td><span class="source-badge src-erp">Sistema DPP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Auto-calculado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar evidencias</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== SECTION 3: Prestaciones CPR ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:var(--amber)">&#x1F3D7;</div>
+    <div class="section-info">
+      <h2>Prestaciones CPR (Declaracion de Prestaciones)</h2>
+      <p>DoPC, marcado CE, prestaciones declaradas segun norma armonizada, organismo notificado</p>
+    </div>
+    <span class="section-count">12 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="dopc"><td><div class="field-name">performance_cpr.dop_number</div><div class="field-desc">Numero de la Declaracion de Prestaciones (DoPC)</div></td><td><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar DoPC</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer n.&#xba;</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="dopc"><td><div class="field-name">performance_cpr.dop_url</div><div class="field-desc">URL del documento DoPC publicado</div></td><td><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar PDF</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Cargar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Enlazar</span></div></td></tr>
+        <tr data-source="dopc"><td><div class="field-name">performance_cpr.ce_marking</div><div class="field-desc">Marcado CE conforme a CPR</div></td><td><span class="source-badge src-dopc">DoPC</span><span class="source-badge src-lab">Certificado ON</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Verificar DoPC</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Confirmar CE</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="dopc"><td><div class="field-name">performance_cpr.harmonised_standard</div><div class="field-desc">Norma armonizada aplicable (p.ej. UNE-EN 14351-1)</div></td><td><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Identificar hEN</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="lab"><td><div class="field-name">performance_cpr.notified_body</div><div class="field-desc">Organismo notificado (nombre y numero NB)</div></td><td><span class="source-badge src-lab">Certificado ON</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar certificado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer NB</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar NANDO</span></div></td></tr>
+        <tr data-source="lab"><td><div class="field-name">declared_performances.resistencia_viento</div><div class="field-desc">Resistencia al viento (UNE-EN 12210, p.ej. Clase C5)</div></td><td><span class="source-badge src-lab">Informe ensayo</span><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar ensayo</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer clase</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="lab"><td><div class="field-name">declared_performances.estanqueidad_agua</div><div class="field-desc">Estanqueidad al agua (UNE-EN 12208, p.ej. Clase 9A)</div></td><td><span class="source-badge src-lab">Informe ensayo</span><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar ensayo</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer clase</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="lab"><td><div class="field-name">declared_performances.permeabilidad_aire</div><div class="field-desc">Permeabilidad al aire (UNE-EN 12207, p.ej. Clase 4)</div></td><td><span class="source-badge src-lab">Informe ensayo</span><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar ensayo</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer clase</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="lab"><td><div class="field-name">declared_performances.transmitancia_termica</div><div class="field-desc">Transmitancia termica Uw (UNE-EN ISO 10077-1, W/m2K)</div></td><td><span class="source-badge src-lab">Informe ensayo / calculo</span><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar ensayo</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer Uw</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar CTE</span></div></td></tr>
+        <tr data-source="lab"><td><div class="field-name">declared_performances.aislamiento_acustico</div><div class="field-desc">Aislamiento acustico Rw (UNE-EN ISO 10140, dB)</div></td><td><span class="source-badge src-lab">Informe ensayo</span><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar ensayo</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer Rw</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="lab"><td><div class="field-name">declared_performances.factor_solar</div><div class="field-desc">Factor solar g (UNE-EN 410)</div></td><td><span class="source-badge src-lab">Informe ensayo</span><span class="source-badge src-dopc">DoPC</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar ensayo</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer g</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="dopc"><td><div class="field-name">performance_cpr.service_life_years</div><div class="field-desc">Vida util estimada del producto (anos)</div></td><td><span class="source-badge src-dopc">DoPC</span><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== SECTION 4: EPD ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:var(--green)">&#x1F30D;</div>
+    <div class="section-info">
+      <h2>DAP / EPD (Declaracion Ambiental de Producto)</h2>
+      <p>Indicadores ambientales EN 15804+A2, huella de carbono, energia, modulos ACV</p>
+    </div>
+    <span class="section-count">15 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="epd"><td><div class="field-name">epd.registration</div><div class="field-desc">Numero de registro de la DAP</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar DAP</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer registro</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.programme / programme_id</div><div class="field-desc">Programa operador (Environdec, GlobalEPD, IBU...) e ID</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.pcr</div><div class="field-desc">Regla de Categoria de Producto (PCR 2019:14 EN 15804+A2)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer PCR</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.standards</div><div class="field-desc">Normas base (ISO 14025, ISO 14040/14044, EN 15804+A2)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Identificar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Asociar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.issue_date / validity</div><div class="field-desc">Fecha de emision y fecha de validez de la DAP</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer fechas</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Alertar caducidad</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.verifier</div><div class="field-desc">Verificador de la DAP (p.ej. AENOR)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lab">Lab / ON</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.lca_practitioner</div><div class="field-desc">Consultor/empresa que realizo el ACV</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.url</div><div class="field-desc">Enlace a la DAP publicada (Environdec, GlobalEPD...)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar URL</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar enlace</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Enlazar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.gwp_total</div><div class="field-desc">Potencial de calentamiento global total (kg CO2 eq, modulos A1-A3)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar DAP</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer GWP</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.modules_declared</div><div class="field-desc">Modulos ACV declarados (A1-A3, A4, A5, B2, B4, C1-C4, D)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Identificar modulos</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">environmental_indicators.gwp_a1_a3 / gwp_a4 / gwp_c1_c4 / gwp_d</div><div class="field-desc">GWP desglosado por modulo (produccion, transporte, fin de vida, beneficios)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar DAP</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer por modulo</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">environmental_indicators.penrt / pert</div><div class="field-desc">Energia primaria no renovable y renovable total (MJ)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">environmental_indicators.adpe</div><div class="field-desc">Agotamiento de recursos abioticos &#x2014; elementos (kg Sb eq)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">environmental_indicators.ap / ep / odp</div><div class="field-desc">Acidificacion, eutrofizacion, destruccion capa ozono</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">epd.geographical_scope</div><div class="field-desc">Alcance geografico de la DAP</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== SECTION 5: REACH ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:var(--red)">&#x2622;</div>
+    <div class="section-info">
+      <h2>REACH / SCIP (Sustancias quimicas)</h2>
+      <p>Sustancias extremadamente preocupantes (SVHC), notificacion SCIP, conformidad REACH art. 33</p>
+    </div>
+    <span class="section-count">6 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="reach"><td><div class="field-name">reach.svhc_present</div><div class="field-desc">Presencia de SVHC en el producto (si/no)</div></td><td><span class="source-badge src-reach">Declaracion REACH</span></td><td><span class="prov-badge prov-fab">Fabricante</span><span class="prov-badge prov-supplier">Proveedor MP</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar declaracion</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Cruzar lista SVHC</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="reach"><td><div class="field-name">reach.svhc_concentration_above_01</div><div class="field-desc">Concentracion SVHC superior al 0,1% en peso</div></td><td><span class="source-badge src-reach">Declaracion REACH</span><span class="source-badge src-lab">Analisis quimico</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar analisis</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Evaluar umbral</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="reach"><td><div class="field-name">reach.svhc_list_version</div><div class="field-desc">Version de la lista candidata SVHC consultada</div></td><td><span class="source-badge src-reach">ECHA</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Consultar ECHA</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Registrar version</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="reach"><td><div class="field-name">reach.substances_checked</div><div class="field-desc">Sustancias verificadas (Pb, Cr VI, ftalatos DEHP/DBP/BBP/DIBP)</div></td><td><span class="source-badge src-reach">Declaracion REACH</span><span class="source-badge src-supplier">Declaracion proveedor</span></td><td><span class="prov-badge prov-supplier">Proveedor MP</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar a proveedores</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Consolidar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="reach"><td><div class="field-name">reach.scip_notification</div><div class="field-desc">Numero de notificacion SCIP (base de datos ECHA)</div></td><td><span class="source-badge src-reach">SCIP DB</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Notificar SCIP</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Obtener ID</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="reach"><td><div class="field-name">reach.last_check</div><div class="field-desc">Fecha de la ultima verificacion REACH</div></td><td><span class="source-badge src-reach">Registro interno</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Registrar fecha</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Alertar renovacion</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== SECTION 6: Fin de vida ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:#059669">&#x267B;</div>
+    <div class="section-info">
+      <h2>Fin de vida y circularidad</h2>
+      <p>Instrucciones de desmontaje, reciclabilidad por componente, codigos LER, gestion RCD</p>
+    </div>
+    <span class="section-count">5 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="manual"><td><div class="field-name">end_of_life.disassembly_instructions</div><div class="field-desc">Instrucciones de desmontaje paso a paso para separar componentes</div></td><td><span class="source-badge src-manual">Manual tecnico</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar manual</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer pasos</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">end_of_life.recyclability_percent_by_component</div><div class="field-desc">Porcentaje de reciclabilidad por componente (marco, vidrio, herrajes...)</div></td><td><span class="source-badge src-epd">DAP/EPD</span><span class="source-badge src-manual">Ficha tecnica</span></td><td><span class="prov-badge prov-fab">Fabricante</span><span class="prov-badge prov-rcd">Gestor RCD</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar datos</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Calcular %</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Validar</span></div></td></tr>
+        <tr data-source="epd"><td><div class="field-name">end_of_life.recyclability_total_percent</div><div class="field-desc">Reciclabilidad total ponderada del producto (%)</div></td><td><span class="source-badge src-epd">DAP/EPD</span></td><td><span class="prov-badge prov-lca">Consultor LCA</span></td><td><div class="tl-workflow"><span class="tl-step">Calcular media ponderada</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">end_of_life.ler_codes</div><div class="field-desc">Codigos LER de residuos (170201, 170202, 170402...)</div></td><td><span class="source-badge src-erp">Clasificacion LER</span><span class="source-badge src-manual">Manual RCD</span></td><td><span class="prov-badge prov-rcd">Gestor RCD</span></td><td><div class="tl-workflow"><span class="tl-step">Identificar materiales</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Asignar LER</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">end_of_life.collection_scheme</div><div class="field-desc">Esquema de recogida (gestor autorizado RCD, punto limpio, programa sectorial)</div></td><td><span class="source-badge src-erp">Plan gestion residuos</span></td><td><span class="prov-badge prov-rcd">Gestor RCD</span><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar plan</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Extraer esquema</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== SECTION 7: Trazabilidad ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:var(--teal)">&#x1F517;</div>
+    <div class="section-info">
+      <h2>Trazabilidad</h2>
+      <p>Hash Trackline, sello de tiempo, QR, GS1 Digital Link, portador de datos</p>
+    </div>
+    <span class="section-count">7 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="erp"><td><div class="field-name">traceability.trackline_hash</div><div class="field-desc">Hash criptografico generado por Trackline</div></td><td><span class="source-badge src-erp">Trackline</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Auto-generado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Hash SHA-256</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Sellar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">traceability.timestamp_iso8601</div><div class="field-desc">Marca de tiempo ISO 8601 del sellado</div></td><td><span class="source-badge src-erp">Trackline</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Auto-generado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Timestamp UTC</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">traceability.eidas_tsa_token</div><div class="field-desc">Token de sello de tiempo cualificado eIDAS (TSA)</div></td><td><span class="source-badge src-erp">TSA cualificada</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar a TSA</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Obtener token</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">traceability.qr_payload_url</div><div class="field-desc">URL codificada en el codigo QR del producto</div></td><td><span class="source-badge src-erp">Trackline</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Generar URL</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Codificar QR</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">traceability.data_carrier / data_carrier_location</div><div class="field-desc">Tipo de portador de datos (QR) y ubicacion fisica</div></td><td><span class="source-badge src-erp">Produccion</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Definir ubicacion</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Registrar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">traceability.gs1_digital_link</div><div class="field-desc">GS1 Digital Link (URI resolvible con GTIN + serial)</div></td><td><span class="source-badge src-erp">GS1 / Trackline</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Generar enlace GS1</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Resolver</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">traceability.status</div><div class="field-desc">Estado de verificacion del bloque de trazabilidad</div></td><td><span class="source-badge src-erp">Sistema DPP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Auto-calculado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar evidencias</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== SECTION 8: Actores ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:#7c3aed">&#x1F465;</div>
+    <div class="section-info">
+      <h2>Actores de la cadena de valor</h2>
+      <p>Operador responsable, distribuidor, instalador, propietario, autoridad de vigilancia</p>
+    </div>
+    <span class="section-count">5 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="erp"><td><div class="field-name">actors.operator_responsible</div><div class="field-desc">Operador economico responsable (fabricante o importador)</div></td><td><span class="source-badge src-erp">Registro mercantil</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Verificar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">actors.distributor</div><div class="field-desc">Distribuidor del producto</div></td><td><span class="source-badge src-erp">ERP / Comercial</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Registrar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="manual"><td><div class="field-name">actors.installer</div><div class="field-desc">Instalador (a cumplimentar en obra)</div></td><td><span class="source-badge src-manual">Acta instalacion</span></td><td><span class="prov-badge prov-fab">Instalador</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar en obra</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Registrar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Actualizar DPP</span></div></td></tr>
+        <tr data-source="manual"><td><div class="field-name">actors.final_owner</div><div class="field-desc">Propietario final (a cumplimentar tras venta)</div></td><td><span class="source-badge src-manual">Escritura / contrato</span></td><td><span class="prov-badge prov-fab">Propietario</span></td><td><div class="tl-workflow"><span class="tl-step">Solicitar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Registrar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Actualizar DPP</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">actors.market_authority_es</div><div class="field-desc">Autoridad de vigilancia del mercado (Ministerio de Industria)</div></td><td><span class="source-badge src-erp">Registro oficial</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Identificar autoridad</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Registrar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ==================== SECTION 9: Registro Art. 13 ==================== -->
+<div class="section">
+  <div class="section-header collapsed" onclick="toggleSection(this)">
+    <div class="section-icon" style="background:#94a3b8">&#x1F3DB;</div>
+    <div class="section-info">
+      <h2>Registro Art. 13 ESPR</h2>
+      <p>Estado del registro europeo de DPP, campos precargados, pendiente de acto delegado</p>
+    </div>
+    <span class="section-count">4 campos</span>
+    <span class="section-chevron">&#x25BE;</span>
+  </div>
+  <div class="section-body hidden">
+    <table class="map-table">
+      <thead><tr><th>Campo DPP</th><th>Documento fuente</th><th>Proveedor</th><th>Flujo Trackline</th></tr></thead>
+      <tbody>
+        <tr data-source="erp"><td><div class="field-name">registry_art13.status</div><div class="field-desc">Estado del registro (PENDING_DELEGATED_ACT, REGISTERED, etc.)</div></td><td><span class="source-badge src-erp">Registro ESPR</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Consultar registro</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Obtener estado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Almacenar</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">registry_art13.label</div><div class="field-desc">Etiqueta legible del estado</div></td><td><span class="source-badge src-erp">Sistema DPP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Auto-generado</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Traducir estado</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">registry_art13.fields_preloaded</div><div class="field-desc">Campos precargados para el registro (dpp_uid, nombre, operador)</div></td><td><span class="source-badge src-erp">Sistema DPP</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Seleccionar campos</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Precargar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Listo para envio</span></div></td></tr>
+        <tr data-source="erp"><td><div class="field-name">registry_art13.note</div><div class="field-desc">Nota sobre plazo del acto delegado (previsto 2028-2030)</div></td><td><span class="source-badge src-erp">Analisis normativo</span></td><td><span class="prov-badge prov-fab">Fabricante</span></td><td><div class="tl-workflow"><span class="tl-step">Monitorizar DOUE</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Actualizar</span><span class="tl-arrow">&#x25B6;</span><span class="tl-step">Alertar</span></div></td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+</div><!-- /container -->
+
+<div class="footer">
+  <strong>Basado en:</strong>
+  <a href="https://eur-lex.europa.eu/eli/reg/2024/3110/oj" target="_blank">CPR (UE) 2024/3110</a> &middot;
+  <a href="https://eur-lex.europa.eu/eli/reg/2024/1781/oj" target="_blank">ESPR (UE) 2024/1781</a> &middot;
+  <a href="https://eur-lex.europa.eu/eli/reg/2006/1907/oj" target="_blank">REACH 1907/2006</a> &middot;
+  <a href="https://www.en-standard.eu/csn-en-15804-a2/" target="_blank">EN 15804+A2</a><br>
+  <a href="https://trackline.codecontract.com" target="_blank">Trackline</a> by <a href="https://codecontract.com" target="_blank">Code Contract S.L.</a> &middot; v0.1 &middot; 20 abril 2026<br>
+  <a href="https://codecontract-dpp.github.io/dpp-construccion-demos/" target="_blank">&#x2190; Visor DPP Construccion</a> &middot;
+  <a href="https://codecontract-dpp.github.io/dpp-validator/" target="_blank">Validador DPP</a> &middot;
+  <a href="https://codecontract-dpp.github.io/dpp-construccion/" target="_blank">Guia DPP Construccion</a><br>
+  <em style="color:#b0b0b0">Documento de referencia tecnica. Los campos exactos dependeran del acto delegado especifico para cada familia de producto de construccion.</em>
+</div>
+
+<script>
+function toggleSection(header) {
+  header.classList.toggle('collapsed');
+  header.nextElementSibling.classList.toggle('hidden');
+}
+
+function filterBy(source) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.map-table tr[data-source]').forEach(row => {
+    if (source === 'all' || row.dataset.source === source) {
+      row.dataset.hidden = 'false';
+      row.style.display = '';
+    } else {
+      row.dataset.hidden = 'true';
+      row.style.display = 'none';
+    }
+  });
+}
+
+function searchFields(query) {
+  const q = query.toLowerCase();
+  document.querySelectorAll('.map-table tr[data-source]').forEach(row => {
+    const text = row.textContent.toLowerCase();
+    if (!q || text.includes(q)) {
+      row.style.display = '';
+    } else {
+      row.style.display = 'none';
+    }
+  });
+  if (q) {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  }
+}
+</script>
+</body>
+</html>
