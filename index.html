@@ -169,15 +169,16 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 <body>
 
 <header class="app-header">
-  <h1>Pasaporte Digital de Producto &mdash; Construccion</h1>
-  <p>DPP conforme a CPR (UE) 2024/3110 y ESPR (UE) 2024/1781 &mdash; Con trazabilidad blockchain Trackline</p>
+  <h1>Pasaporte Digital de Producto para construccion</h1>
+  <p>Ejemplo de DPP conforme al CPR (UE) 2024/3110 y alineado con el marco europeo del ESPR</p>
+  <p style="opacity:.7; font-size:.85rem; margin-top:.35rem;">Con evidencia trazable, validacion estructurada y exportacion JSON-LD con Trackline</p>
   <div class="header-badges">
     <span>CPR 2024/3110</span>
     <span>ESPR 2024/1781</span>
     <span>REACH</span>
     <span>EN 15804+A2</span>
     <span>Trackline Evidence</span>
-    <span>Art. 13 Registry-Ready</span>
+    <span>Arts. 75-79 CPR (Registro DPP)</span>
   </div>
 </header>
 
@@ -199,7 +200,7 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
       <option value="filled">Con datos (ejemplo)</option>
       <option value="empty">Plantilla vacia</option>
     </select>
-    <button class="btn-json" onclick="showJSON()">{} Ver JSON-LD</button>
+    <button class="btn-json" id="btnJson" onclick="showJSON()" style="display:none">{} Ver JSON-LD</button>
   </div>
 </nav>
 
@@ -208,10 +209,9 @@ body{font-family:'Segoe UI',system-ui,sans-serif;background:var(--bg);color:var(
 </main>
 
 <footer class="app-footer">
-  DPP Construccion v1.0 &mdash;
-  <a href="https://github.com/CodeContract-DPP/dpp-construccion-demos" target="_blank">GitHub</a> &mdash;
-  Evidencia: <a href="https://trackline.codecontract.com" target="_blank">Trackline by Code Contract S.L.</a> &mdash;
-  CPR (UE) 2024/3110 &middot; ESPR (UE) 2024/1781 &middot; Registro Central Art. 13
+  DPP Construccion &middot; Demo v1.0<br>
+  Evidencia trazable con <a href="https://trackline.codecontract.io" target="_blank">Trackline</a> by <a href="https://codecontract.io" target="_blank">Code Contract</a><br>
+  Marco regulatorio: CPR (UE) 2024/3110 &middot; ESPR (UE) 2024/1781 &middot; Registro central europeo del DPP
 </footer>
 
 <!-- JSON modal -->
@@ -260,8 +260,13 @@ document.addEventListener('keydown', function(e) {
   if (e.key === 'Escape') closeJSON();
 });
 
-document.getElementById('productSelect').addEventListener('change', loadDPP);
-document.getElementById('versionSelect').addEventListener('change', loadDPP);
+function toggleJsonBtn() {
+  var ver = document.getElementById('versionSelect').value;
+  document.getElementById('btnJson').style.display = ver === 'empty' ? '' : 'none';
+}
+
+document.getElementById('productSelect').addEventListener('change', function() { loadDPP(); toggleJsonBtn(); });
+document.getElementById('versionSelect').addEventListener('change', function() { loadDPP(); toggleJsonBtn(); });
 
 // URL parameters: ?product=ventana-aluminio&version=empty
 (function() {
@@ -279,6 +284,7 @@ document.getElementById('versionSelect').addEventListener('change', loadDPP);
     ver.value = 'empty';
   }
   loadDPP();
+  toggleJsonBtn();
 })();
 </script>
 </body>
