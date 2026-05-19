@@ -265,7 +265,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <!-- ============ VERSION BAR ============ -->
 <div class="version-bar">
 <div class="container">
-  <strong>v5.5 &mdash; 19 mayo 2026.</strong> Alineada con el CPR 2024/3110, ESPR 2024/1781, Reg. Delegado 2024/2769 (EVCP 3+), eIDAS 2 (UE 2024/1183) y Plan de Trabajo CPR 2026-2029 (COM(2025) 772 final).
+  <strong>v5.6 &mdash; 19 mayo 2026.</strong> Alineada con el CPR 2024/3110, ESPR 2024/1781, Reg. Delegado 2024/2769 (EVCP 3+), eIDAS 2 (UE 2024/1183) y Plan de Trabajo CPR 2026-2029 (COM(2025) 772 final).
   <br><strong>Hito clave:</strong> 8 enero 2026 &mdash; aplicacion general del CPR 2024/3110. La DdPC sustituira progresivamente a la DdP para productos cubiertos por nuevas especificaciones tecnicas armonizadas (hTS) bajo el 2024/3110; mientras tanto, el CPR 305/2011 se mantiene aplicable de forma transitoria a determinados productos. Regimen sancionador previsto desde 8 enero 2027 (referencia provisional en Espana: Ley 21/1992 Titulo V, arts. 30-38, hasta que Espana notifique su regimen sancionador nacional especifico a la Comision antes de diciembre de 2026).
   <br><br><strong>Alcance y naturaleza de esta guia:</strong> distingue entre <em>obligacion legal</em>, <em>referencia tecnica</em> y <em>propuesta operativa de Code Contract</em>. Algunas obligaciones ya derivan del CPR 2024/3110; otras dependeran de la publicacion de nuevas especificaciones tecnicas armonizadas, actos delegados o directrices europeas. <em>Nota terminologica:</em> en esta guia se emplea <strong>hTS</strong> (especificacion tecnica armonizada) para el nuevo marco 2024/3110 &mdash; engloba normas armonizadas y otras especificaciones de los arts. 5 y 6 &mdash;; el termino <strong>hEN</strong> se reserva para las normas armonizadas heredadas del Reglamento 305/2011 durante el periodo transitorio.
 </div>
@@ -576,7 +576,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 </table>
 
 <div class="alert alert-info">
-  <strong>Como se calculan:</strong> Los indicadores se calculan mediante ACV (Analisis de Ciclo de Vida) segun <strong>EN 15804:2012+A2:2019</strong>, que es la PCR (Regla de Categoria de Producto) obligatoria para construccion. Los modulos obligatorios son A1-A3 (fabricacion) y C1-C4 (fin de vida). El modulo D (beneficios fuera del sistema) es informativo.
+  <strong>Como se calculan:</strong> Los indicadores se calculan mediante ACV (Analisis de Ciclo de Vida). El art. 15 CPR remite a la metodologia que concrete la Comision (software publicado y actos delegados); en la practica, la <strong>EN 15804:2012+A2:2019</strong> es la <em>referencia tecnica principal</em> y la PCR (Regla de Categoria de Producto) de facto del sector, no impuesta expresamente por el Reglamento. Los modulos habituales son A1-A3 (fabricacion) y C1-C4 (fin de vida); el modulo D (beneficios fuera del sistema) es informativo.
   <br><br>
   <strong>Sistema EVCP 3+ (Reg. Delegado UE 2024/2769):</strong> el nuevo sistema EVCP 3+ aplica especificamente a las caracteristicas ambientales. A diferencia del EVCP 3 clasico, el organismo notificado <em>no realiza ensayos</em>: valida el modelo ACV (datos de entrada, hipotesis de modelizacion, calculos). El fabricante mantiene FPC y datos primarios. La capacidad de validacion en Espana esta en transicion (ENAC acreditando laboratorios para EN 15804+A2 y Environmental Footprint 3.1).
 </div>
@@ -672,7 +672,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 </tbody>
 </table>
 
-<p>Cuando se publique la <strong>hTS revisada</strong> de una familia en el Diario Oficial de la UE, normalmente abre un <strong>periodo de coexistencia (~1 ano)</strong> durante el cual el fabricante puede usar la hEN antigua o la nueva. Pasado ese periodo, la hEN antigua se retira del DOUE y solo la hTS revisada habilita el marcado CE bajo el nuevo CPR.</p>
+<p>Cuando se publique la <strong>hTS revisada</strong> de una familia en el Diario Oficial de la UE, las obligaciones y requisitos de producto bajo el nuevo marco <strong>no aplican de inmediato</strong>: el propio Reglamento establece un plazo (tipicamente del orden de <strong>12 meses</strong> tras la entrada en vigor de la hTS) durante el cual el fabricante puede usar la hEN antigua o la nueva. Pasado ese periodo de coexistencia, la hEN antigua se retira del DOUE y solo la hTS revisada habilita el marcado CE bajo el nuevo CPR.</p>
 
 <div class="alert alert-info">
   <strong>Implicacion practica:</strong> si tu familia esta en la Fase 1 (prioritarias), vigila las publicaciones del DOUE durante 2026-2028 y prepara tu DdPC digital ya. Si esta en Fases 2 o 3 tienes mas margen, pero la infraestructura digital que montes hoy sirve para cualquier fase. La Comision publicara informes anuales de progreso desde finales de 2026.
@@ -906,7 +906,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 
   <div class="step-card">
     <h4>Obtener datos ambientales (ACV / DAP)</h4>
-    <p>Para Fase 1 (obligatoria ya): calcular GWP por producto segun EN 15804+A2. Si no se dispone de DAP propia, iniciar el proceso con un programa DAP reconocido (EPD International, IBU, GlobalEPD, DAPcons). Solicitar DAPs de proveedores criticos (cemento, acero, vidrio, resinas).</p>
+    <p>Para los productos de familias cuya hTS revisada ya haya sido publicada en el DOUE, el calculo de los indicadores a&ndash;d del GWP (Fase 1 del Anexo II) es exigible desde el 8 de enero de 2026; mientras la familia este bajo el regimen transitorio del 305/2011, todavia no es exigible. En cualquier caso, conviene calcular ya el GWP por producto siguiendo la referencia tecnica principal (EN 15804+A2). Si no se dispone de DAP propia, iniciar el proceso con un programa DAP reconocido (EPD International, IBU, GlobalEPD, DAPcons). Solicitar DAPs de proveedores criticos (cemento, acero, vidrio, resinas).</p>
     <div class="step-who">Lidera: Sostenibilidad / I+D</div>
     <div class="step-output">Entregable: DAP verificada o datos ACV modulos A1-A3 + C1-C4</div>
   </div>
@@ -1137,12 +1137,4 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 </div>
 <div class="faq-item">
   <div class="faq-q">Necesito un Organismo Notificado para la DdPC?</div>
-  <div class="faq-a">Depende del sistema EVCP aplicable a tu producto. Para las caracteristicas ambientales predeterminadas (Anexo II), se aplica el sistema EVCP 3+: el fabricante recopila datos y calcula, el ON valida. Para las prestaciones tecnicas, se mantiene el sistema EVCP habitual de tu producto.</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Que formato tiene que tener la DdPC?</div>
-  <div class="faq-a">Machine-readable (procesable por maquinas). El reglamento no prescribe un formato especifico, pero la practica apunta a JSON-LD (Schema.org) para datos estructurados y XML (ILCD+EPD) para datos ambientales. Un PDF no es machine-readable. La DdPC debe ser un dataset, no un documento narrativo.</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Que regimen sancionador se aplica?</div>
-  <div class="faq-a">El <strong>art. 92 del CPR 2024/3110</strong> exige a los Estado
+  <div class="faq-a">Depende del sistema EVCP aplicable a tu producto. Para las caracteristicas ambientales predeterminadas (Anexo II), se aplica el sistema EVCP 3+: el fabricante recopila datos y calcula, el 
