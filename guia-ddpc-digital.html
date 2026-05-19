@@ -265,8 +265,9 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <!-- ============ VERSION BAR ============ -->
 <div class="version-bar">
 <div class="container">
-  <strong>v5.0 &mdash; 29 abril 2026.</strong> Alineada con el CPR 2024/3110, ESPR 2024/1781, Reg. Delegado 2024/2769 (EVCP 3+), eIDAS 2 (UE 2024/1183) y Plan de Trabajo COM(2025) 772.
-  <br><strong>Hito clave:</strong> 8 enero 2026 &mdash; aplicacion general del CPR 2024/3110. La DdPC sustituye a la DdP para productos con nueva especificacion tecnica armonizada (hTS). Regimen sancionador espanol activo desde 8 enero 2027 (Ley 21/1992 Titulo V, arts. 30-38).
+  <strong>v5.1 &mdash; 19 mayo 2026.</strong> Alineada con el CPR 2024/3110, ESPR 2024/1781, Reg. Delegado 2024/2769 (EVCP 3+), eIDAS 2 (UE 2024/1183) y Plan de Trabajo COM(2025) 772.
+  <br><strong>Hito clave:</strong> 8 enero 2026 &mdash; aplicacion general del CPR 2024/3110. La DdPC sustituira progresivamente a la DdP para productos cubiertos por nuevas especificaciones tecnicas armonizadas (hTS) bajo el 2024/3110; mientras tanto, el CPR 305/2011 se mantiene aplicable de forma transitoria a determinados productos. Regimen sancionador previsto desde 8 enero 2027 (referencia provisional en Espana: Ley 21/1992 Titulo V, arts. 30-38, hasta que se notifique la transposicion especifica a la Comision antes de diciembre de 2026).
+  <br><br><strong>Alcance y naturaleza de esta guia:</strong> distingue entre <em>obligacion legal</em>, <em>referencia tecnica</em> y <em>propuesta operativa de Code Contract</em>. Algunas obligaciones ya derivan del CPR 2024/3110; otras dependeran de la publicacion de nuevas especificaciones tecnicas armonizadas, actos delegados o directrices europeas. <em>Nota terminologica:</em> en esta guia se emplea <strong>hTS</strong> (especificacion tecnica armonizada) para el nuevo marco 2024/3110 &mdash; engloba normas armonizadas y otras especificaciones de los arts. 5 y 6 &mdash;; el termino <strong>hEN</strong> se reserva para las normas armonizadas heredadas del Reglamento 305/2011 durante el periodo transitorio.
 </div>
 </div>
 
@@ -317,8 +318,8 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <section id="resumen">
 <div class="exec-summary">
   <h2>0. Resumen Ejecutivo</h2>
-  <p>El Reglamento (UE) 2024/3110 sustituye al CPR 305/2011 e introduce la <strong>Declaracion de Prestaciones y de Conformidad (DdPC)</strong>. <strong>El CPR es aplicable desde el 8 de enero de 2026</strong>; la DdPC es <strong>exigible familia a familia</strong> a medida que la Comision publique la nueva especificacion tecnica armonizada (hTS) revisada bajo el nuevo marco. No es un cambio de nombre: anade indicadores ambientales (GWP), informacion REACH, formato machine-readable y firma del representante autorizado del fabricante (siendo recomendable la firma electronica cualificada eIDAS 2 como buena practica).</p>
-  <p>El regimen sancionador (art. 92 CPR) entra en vigor el <strong>8 de enero de 2027</strong>. En Espana via Ley 21/1992 de Industria: <span class="key-number">hasta 100.000.000 &euro;</span> en infracciones muy graves, cierre de establecimiento hasta 5 anos y prohibicion de contratar con AA.PP. hasta 5 anos.</p>
+  <p>El Reglamento (UE) 2024/3110 sustituye al CPR 305/2011 e introduce la <strong>Declaracion de Prestaciones y de Conformidad (DdPC)</strong>. <strong>El CPR es aplicable desde el 8 de enero de 2026</strong>, pero con regimen transitorio: la DdPC <strong>sustituira progresivamente</strong> a la DdP para productos cubiertos por especificaciones tecnicas armonizadas (hTS) revisadas bajo el nuevo marco o por los actos aplicables. Mientras esa transicion no se produzca para una familia, determinados productos seguiran operando bajo el regimen transitorio del CPR 305/2011. No es un cambio de nombre: cuando aplique, anade indicadores ambientales (GWP), informacion REACH, formato machine-readable y firma del representante autorizado del fabricante (siendo recomendable la firma electronica cualificada eIDAS 2 como buena practica).</p>
+  <p>El regimen sancionador (art. 92 CPR) entra en vigor el <strong>8 de enero de 2027</strong>. <strong>A dia de hoy no existe norma sancionadora espanola especifica</strong> para el nuevo CPR; como hipotesis de referencia, la transposicion espanola se apoyaria en la Ley 21/1992 de Industria (cuantias orientativas: <span class="key-number">hasta 100.000.000 &euro;</span> en infracciones muy graves, cierre de establecimiento hasta 5 anos y prohibicion de contratar con AA.PP. hasta 5 anos), hasta que Espana notifique a la Comision su regimen sancionador especifico antes de diciembre de 2026. Las cuantias y medidas definitivas podrian variar si se aprueba una norma <em>ad hoc</em>.</p>
   <p>Una DdPC digital bien estructurada cubre aproximadamente el <span class="key-number">~65%</span> del contenido del futuro Pasaporte Digital de Producto (DPP). Quien resuelve hoy la DdPC llega al DPP con un ultimo kilometro, no con una maraton.</p>
   <p style="font-size:0.85em;color:var(--text-light);margin-top:-8px;font-style:italic;">El ~65% es una <strong>estimacion funcional propia</strong> de Code Contract basada en el solapamiento de datos exigidos por la DdPC y los previstos para el DPP. <strong>No es un porcentaje definido por el Reglamento</strong>.</p>
   <p><strong>El camino mas eficiente:</strong> DdP &rarr; DdPC digital &rarr; DPP. No saltar directamente al DPP cuando llegue la obligacion.</p>
@@ -329,7 +330,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <section id="que-es" class="sec-coll">
 <details>
 <summary><h2>1. Que es la DdPC y que cambia frente a la DdP</h2></summary>
-<p>La DdPC (Declaracion de Prestaciones y de Conformidad) es el documento central del CPR 2024/3110, definida en el <strong>art. 15</strong> y el <strong>Anexo V</strong>. Sustituye a la antigua DdP (Declaracion de Prestaciones) del Reglamento 305/2011. El fabricante asume responsabilidad legal plena no solo por las prestaciones declaradas, sino por la <em>conformidad</em> del producto con los requisitos del art. 7.</p>
+<p>La DdPC (Declaracion de Prestaciones y de Conformidad) es el documento central del CPR 2024/3110, definida en el <strong>art. 15</strong> y el <strong>Anexo V</strong>. Sustituira progresivamente a la antigua DdP (Declaracion de Prestaciones) del Reglamento 305/2011 a medida que la Comision publique las hTS revisadas bajo el nuevo marco. Cuando existan requisitos de producto aplicables conforme al <strong>art. 7</strong> y a los actos correspondientes, la DdPC debera declarar y evidenciar su cumplimiento &mdash; por ejemplo, durabilidad, reciclabilidad, contenido reciclado, reparabilidad u otros requisitos que se establezcan para la familia o categoria de producto.</p>
 
 <div class="comparison">
   <div class="col-before">
@@ -359,7 +360,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 </div>
 
 <div class="alert alert-warning">
-  <strong>Atencion:</strong> La DdPC no es solo un cambio de nombre. El fabricante asume responsabilidad legal plena por la <em>conformidad</em> del producto (art. 7: durabilidad, reciclabilidad, contenido reciclado, reparabilidad), no solo por las prestaciones declaradas. Esto eleva el estandar probatorio y convierte la custodia documental auditable en un activo critico.
+  <strong>Atencion:</strong> La DdPC no es solo un cambio de nombre. Cuando existan requisitos de producto aplicables conforme al art. 7 y a los actos correspondientes (durabilidad, reciclabilidad, contenido reciclado, reparabilidad u otros), la DdPC debera declarar y evidenciar su cumplimiento. No todos los requisitos del art. 7 son automaticamente exigibles para todas las familias desde el primer dia; dependera de la hTS revisada o del acto delegado aplicable a cada producto. Cuando aplique, eleva el estandar probatorio y convierte la custodia documental auditable en un activo critico.
 </div>
 
 <h3>Articulos clave del CPR 2024/3110 para la DdPC</h3>
@@ -368,8 +369,10 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <tbody>
 <tr><td><strong>Art. 6</strong></td><td>Requisitos basicos de las obras de construccion</td><td>Define los 7 requisitos basicos que los productos deben satisfacer</td></tr>
 <tr><td><strong>Art. 7</strong></td><td>Requisitos de los productos de construccion</td><td>Durabilidad, reciclabilidad, contenido reciclado, reparabilidad &mdash; base de la parte de conformidad</td></tr>
-<tr><td><strong>Art. 13</strong></td><td>Obligaciones del fabricante</td><td>Obligacion de elaborar la DdPC antes de la comercializacion</td></tr>
+<tr><td><strong>Art. 13</strong></td><td>Declaracion de prestaciones y de conformidad (regla general)</td><td>Establece la regla general de emision de la DdPC antes de la comercializacion</td></tr>
+<tr><td><strong>Art. 14</strong></td><td>Excepciones a la obligacion de elaborar la DdPC</td><td>Supuestos en que la DdPC no es exigible (productos a medida, microempresas, etc.)</td></tr>
 <tr><td><strong>Art. 15</strong></td><td>Contenido de la DdPC</td><td>Define los bloques obligatorios: prestaciones + conformidad + ambiental + REACH</td></tr>
+<tr><td><strong>Art. 22</strong></td><td>Obligaciones de los fabricantes</td><td>Refuerza la obligacion del fabricante de elaborar la DdPC, conservar documentacion y garantizar conformidad</td></tr>
 <tr><td><strong>Anexo II</strong></td><td>19 caracteristicas ambientales predeterminadas</td><td>GWP (Fase 1), indicadores adicionales (Fases 2 y 3)</td></tr>
 <tr><td><strong>Anexo V</strong></td><td>Modelo y contenido de la DdPC</td><td>Formato y campos obligatorios</td></tr>
 <tr><td><strong>Arts. 75-80</strong></td><td>Pasaporte Digital de Producto</td><td>La DdPC es la base del DPP &mdash; mismos datos, distinta infraestructura</td></tr>
@@ -458,7 +461,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
   <div class="card" style="border-left:3px solid var(--green);">
     <div class="card-icon">&#10003;</div>
     <h4>Bloque B: Conformidad (NUEVO)</h4>
-    <p>Declaracion de cumplimiento de los requisitos de producto del art. 7: durabilidad, reciclabilidad, contenido reciclado, reparabilidad. El fabricante asume responsabilidad legal plena.</p>
+    <p>Declaracion de cumplimiento de los requisitos de producto del art. 7 <em>cuando sean aplicables</em>: durabilidad, reciclabilidad, contenido reciclado, reparabilidad u otros establecidos para la familia. Su exigibilidad depende de la hTS revisada o del acto delegado correspondiente.</p>
   </div>
   <div class="card" style="border-left:3px solid var(--green);">
     <div class="card-icon">&#127793;</div>
@@ -511,6 +514,16 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <div class="alert alert-warning">
   <strong>Las 4 novedades respecto a la antigua DdP &mdash; donde duele:</strong> los subcampos <strong>1c (UID al DPP)</strong>, <strong>5 (vida util)</strong>, <strong>9d (GWP desglosado)</strong> y <strong>10 (conformidad req. producto, Anexos I&middot;III&middot;IV)</strong> son los que requieren mayor esfuerzo de recopilacion y los que mas valor aportan al futuro DPP. Si tu DdP actual solo cubre los campos legacy, te falta la mitad de la DdPC. La firma cualificada (12d) es buena practica recomendable, no obligacion adicional.
 </div>
+
+<h3>Otros elementos previstos en el Anexo V</h3>
+<p>Ademas de los 12 campos modelados arriba, el Anexo V contempla &mdash; entre otros &mdash; los siguientes elementos cuando proceda:</p>
+<ul style="margin-left:24px;margin-bottom:16px;">
+  <li><strong>Codigo unico del tipo de producto</strong> y, cuando este disponible, <strong>numero de lote o de serie</strong>.</li>
+  <li><strong>Categoria de producto</strong>, <strong>usos previstos</strong>, <strong>dimensiones</strong> o <strong>clasificacion</strong>.</li>
+  <li><strong>Componentes esenciales</strong> cuando proceda.</li>
+  <li><strong>Vida util estimada media y minima</strong>, <strong>variantes</strong>, e incluso <strong>fecha y lugar de ultima desinstalacion</strong> si el producto ya estuvo instalado en una obra (productos reutilizados).</li>
+  <li><strong>Permalinks / data carriers / documentacion asociada:</strong> registros del fabricante en bases de datos de la UE, informacion REACH cuando proceda, informacion general del producto, instrucciones de uso y seguridad conforme al <strong>Anexo IV</strong>.</li>
+</ul>
 </details>
 </section>
 
@@ -518,7 +531,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <section id="fases-ambientales" class="sec-coll">
 <details>
 <summary><h2>4. Indicadores ambientales del Anexo II (3 fases)</h2></summary>
-<p>El Anexo II del CPR 2024/3110 establece 19 caracteristicas ambientales predeterminadas que se incorporan de forma progresiva en tres fases. Son obligatorias para todos los productos con marcado CE, independientemente de la familia.</p>
+<p>El Anexo II del CPR 2024/3110 establece 19 caracteristicas ambientales predeterminadas que se incorporan progresivamente a la DdPC en tres fases. Para los productos que ya deban emitir DdPC bajo el nuevo CPR 2024/3110, deberan declararse los indicadores <strong>a&ndash;d</strong> desde el <strong>8 de enero de 2026</strong>; <strong>e&ndash;m</strong> desde el <strong>9 de enero de 2030</strong>; y <strong>n&ndash;s</strong> desde el <strong>9 de enero de 2032</strong>. La exigibilidad practica dependera de la aplicacion del nuevo marco a cada familia de producto y de sus especificaciones tecnicas armonizadas (hTS) revisadas.</p>
 
 <h3>Fase 1 &mdash; Desde 8 enero 2026 (letras a-d)</h3>
 <div class="alert alert-danger">
@@ -612,7 +625,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
   </div>
   <div class="timeline-item critical">
     <div class="tl-date">8 enero 2026</div>
-    <div class="tl-text"><strong>Aplicacion general de la mayoria de disposiciones.</strong> La DdPC sustituye a la DdP para productos con nueva hEN. Fase 1 Anexo II: GWP obligatorio (letras a-d). Los fabricantes deben declarar GWP-total, GWP-fossil, GWP-biogenic y GWP-luluc.</div>
+    <div class="tl-text"><strong>Aplicacion general de la mayoria de disposiciones.</strong> La DdPC sustituye progresivamente a la DdP para productos cubiertos por una hTS revisada bajo el nuevo marco. Fase 1 Anexo II: indicadores ambientales a&ndash;d obligatorios (GWP-total, GWP-fossil, GWP-biogenic y GWP-luluc) cuando la DdPC sea exigible.</div>
   </div>
   <div class="timeline-item critical">
     <div class="tl-date">8 enero 2027</div>
@@ -671,7 +684,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
   </div>
   <div class="card">
     <h4>Accesible 10+ anos</h4>
-    <p>Disponibilidad continua online durante la vida util del producto. SLA minimo 99,9%. Un PDF en una web puede desaparecer en cualquier momento.</p>
+    <p>Disponibilidad continua online durante la vida util del producto. SLA recomendado &ge;99,9% para acreditar diligencia y disponibilidad continua. Un PDF en una web puede desaparecer en cualquier momento.</p>
   </div>
   <div class="card">
     <h4>Integrable con DPP</h4>
@@ -838,7 +851,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 </div>
 
 <div class="alert alert-info">
-  <strong>Regimen transitorio:</strong> Mientras la Comision no publique la hEN revisada para una familia, el fabricante sigue operando bajo el 305/2011 con DdP. Pero la DdPC para las familias de primera oleada es inminente. Quien prepare su infraestructura digital ahora podra reutilizarla para todas las oleadas siguientes.
+  <strong>Regimen transitorio:</strong> Mientras la Comision no publique la hTS revisada para una familia, el fabricante sigue operando bajo el 305/2011 con DdP (sobre la base de su hEN legacy). Pero la DdPC para las familias de primera oleada es inminente. Quien prepare su infraestructura digital ahora podra reutilizarla para todas las oleadas siguientes.
 </div>
 </details>
 </section>
@@ -852,7 +865,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <div class="steps">
   <div class="step-card">
     <h4>Clasificar la cartera de productos</h4>
-    <p>Identificar en que familia del Anexo VII esta cada producto, en que oleada entra la nueva hEN, y priorizar por impacto comercial y volumen. Agrupar productos que comparten base tecnica (misma hEN, mismo proceso) para optimizar el numero de DdPC.</p>
+    <p>Identificar en que familia del Anexo VII esta cada producto, en que oleada entra la nueva hTS, y priorizar por impacto comercial y volumen. Agrupar productos que comparten base tecnica (misma hTS, mismo proceso) para optimizar el numero de DdPC.</p>
     <div class="step-who">Lidera: Comercial + Calidad</div>
     <div class="step-output">Entregable: Mapa de productos por familia/oleada + agrupaciones</div>
   </div>
@@ -901,7 +914,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 
   <div class="step-card">
     <h4>Garantizar archivo inmutable a 10+ anos</h4>
-    <p>Contratar servicio cualificado de archivo electronico con conservacion LTV (Long-Term Validation), renovacion automatica de firmas cuando expiren los certificados, y SLA minimo 99,9%. El archivo debe garantizar la conservacion incluso en caso de insolvencia del proveedor.</p>
+    <p>Contratar servicio cualificado de archivo electronico con conservacion LTV (Long-Term Validation), renovacion automatica de firmas cuando expiren los certificados, y SLA recomendado &ge;99,9%. El archivo debe garantizar la conservacion incluso en caso de insolvencia del proveedor.</p>
     <div class="step-who">Lidera: IT + Legal</div>
     <div class="step-output">Entregable: Contrato de archivo cualificado + SLA documentado</div>
   </div>
@@ -937,7 +950,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <table>
 <thead><tr><th>Campo DdPC</th><th>Estado tipico PYME</th><th>Estado tipico gran empresa</th><th>Prioridad</th></tr></thead>
 <tbody>
-<tr><td>Prestaciones tecnicas (hEN)</td><td class="gap-verde">Disponible</td><td class="gap-verde">Disponible</td><td>Baja (ya existe)</td></tr>
+<tr><td>Prestaciones tecnicas (hTS)</td><td class="gap-verde">Disponible</td><td class="gap-verde">Disponible</td><td>Baja (ya existe)</td></tr>
 <tr><td>Sistema EVCP / ON</td><td class="gap-verde">Disponible</td><td class="gap-verde">Disponible</td><td>Baja</td></tr>
 <tr><td>GWP (Fase 1 Anexo II)</td><td class="gap-rojo">Falta</td><td class="gap-ambar">Parcial (DAP generica)</td><td>Critica (obligatorio 2026)</td></tr>
 <tr><td>Conformidad art. 7</td><td class="gap-rojo">Falta</td><td class="gap-ambar">Parcial</td><td>Alta</td></tr>
@@ -977,7 +990,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <tr><td><strong>I+D</strong></td><td>Especificaciones de producto, configuraciones, formulaciones, durabilidad</td></tr>
 <tr><td><strong>IT</strong></td><td>Integracion ERP/PLM, formato machine-readable, GS1, infraestructura digital</td></tr>
 <tr><td><strong>Sostenibilidad</strong></td><td>ACV, DAPs propias, indicadores ambientales, contenido reciclado, reciclabilidad</td></tr>
-<tr><td><strong>Legal</strong></td><td>DoPC, vigilancia regulatoria, REACH, firma cualificada, archivo</td></tr>
+<tr><td><strong>Legal</strong></td><td>DdPC, vigilancia regulatoria, REACH, firma cualificada, archivo</td></tr>
 <tr><td><strong>Comercial</strong></td><td>Fichas de producto, catologos, BIM, comunicacion de datos ambientales a clientes</td></tr>
 <tr><td><strong>Logistica</strong></td><td>Remesas, destino, trazabilidad, data carriers (QR en producto)</td></tr>
 </tbody>
@@ -1011,8 +1024,8 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 
 <p><em>Los costes de plataforma y firma/archivo son recurrentes (anuales). El resto son costes de proyecto (una vez). Estos costes cubren solo la adaptacion documental; ACV, DAP y Organismo Notificado son partidas separadas que dependen del numero de productos y la complejidad del ACV.</em></p>
 
-<h3>Regimen sancionador espanol &mdash; rangos por gravedad</h3>
-<p>Vigente por <strong>Ley 21/1992 de Industria, Titulo V, arts. 30-38</strong> y RD 2200/1995. Activo desde el 8 de enero de 2027. Vigilancia delegada en CCAA.</p>
+<h3>Regimen sancionador espanol &mdash; rangos por gravedad (hipotesis de referencia)</h3>
+<p><strong>A dia de hoy no existe norma sancionadora espanola especifica para el nuevo CPR 2024/3110.</strong> Como referencia hasta que Espana notifique a la Comision su regimen sancionador especifico (antes de diciembre de 2026), la transposicion previsiblemente se apoyara en la <strong>Ley 21/1992 de Industria (Titulo V, arts. 30-38)</strong> y RD 2200/1995. Las cuantias y medidas definitivas podrian variar si se aprueba una norma <em>ad hoc</em>. Aplicacion prevista desde el 8 de enero de 2027. Vigilancia delegada en CCAA.</p>
 
 <table>
 <thead><tr><th>Tipo de infraccion</th><th>Rango sancionador</th><th>Ejemplos tipicos en DdPC</th><th>Medidas accesorias</th></tr></thead>
@@ -1042,8 +1055,8 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
     <p>Productos sin DdPC conforme no pueden llevar marcado CE. Sin CE, no pueden comercializarse en la UE.</p>
   </div>
   <div class="card" style="border-left:3px solid var(--red);">
-    <h4>Responsabilidad jurídica del firmante</h4>
-    <p>La QES eIDAS 2 vincula la firma a la persona fisica responsable. La responsabilidad penal del directivo es directa en infracciones muy graves.</p>
+    <h4>Responsabilidad personal del firmante</h4>
+    <p>La QES eIDAS 2 vincula la firma a la persona fisica responsable. Ademas de la responsabilidad administrativa y civil, podria existir responsabilidad penal si los hechos constituyen delito &mdash; por ejemplo, falsedad documental, riesgo grave para la seguridad o dano ambiental &mdash;, pero no de forma automatica por la mera existencia de una infraccion administrativa.</p>
   </div>
 </div>
 </details>
@@ -1054,7 +1067,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 <details>
 <summary><h2>12. Checklist de preparacion</h2></summary>
 <div class="checklist">
-  <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Clasificar la cartera de productos</strong> &mdash; Identificar en que familia del Anexo VII esta cada producto y en que oleada entra la nueva hEN. Priorizar por volumen e impacto comercial.</div></div>
+  <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Clasificar la cartera de productos</strong> &mdash; Identificar en que familia del Anexo VII esta cada producto y en que oleada entra la nueva hTS. Priorizar por volumen e impacto comercial.</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Auditar las DdP existentes</strong> &mdash; Revisar que datos ya se tienen (prestaciones, ensayos, certificados) y que falta para los 12 campos del Anexo V.</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Evaluar datos ambientales (GWP)</strong> &mdash; Comprobar si se dispone de ACV/DAP conforme EN 15804+A2. Si no, iniciar proceso con programa DAP reconocido.</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Solicitar DAPs de proveedores criticos</strong> &mdash; Cemento, acero, vidrio, resinas, aditivos. Establecer SLAs de datos con proveedores estrategicos.</div></div>
@@ -1062,12 +1075,12 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Documentar conformidad art. 7</strong> &mdash; Evidenciar durabilidad, reciclabilidad, contenido reciclado y reparabilidad por producto-tipo.</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Elegir plataforma de gestion DdPC</strong> &mdash; Migrar de PDFs a un sistema que genere DdPC en formato machine-readable, con versionado y trazabilidad.</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Definir el flujo de firma de la DdPC</strong> &mdash; Identificar persona facultada para firmar (lugar, fecha, cargo y nombre). Recomendado (no obligatorio): firma electronica cualificada eIDAS 2 + sello electronico de empresa para reforzar valor probatorio.</div></div>
-  <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Garantizar archivo a 10+ anos</strong> &mdash; Asegurar servicio de archivo electronico cualificado con conservacion LTV y SLA minimo 99,9%.</div></div>
+  <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Garantizar archivo a 10+ anos</strong> &mdash; Asegurar servicio de archivo electronico cualificado con conservacion LTV y SLA recomendado &ge;99,9%.</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Planificar integracion ERP/BIM</strong> &mdash; Evaluar como conectar los datos de la DdPC con los sistemas existentes (SAP, PLM, BIM, prescripcion).</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Realizar piloto con 1-3 productos</strong> &mdash; DdPC completa end-to-end, con todos los campos, firma y archivo. Documentar lecciones.</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Formar al equipo</strong> &mdash; Calidad, IT, Legal, Comercial y Sostenibilidad necesitan entender el nuevo marco documental.</div></div>
   <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Preparar infraestructura DPP</strong> &mdash; Definir identificadores unicos, evaluar data carriers (QR/RFID GS1), pre-registrar GTINs para cuando llegue el acto delegado.</div></div>
-  <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Establecer vigilancia regulatoria</strong> &mdash; Monitorizar publicacion de actos delegados, nuevas hEN, actualizaciones de la Candidate List SVHC y calendario de oleadas.</div></div>
+  <div class="checklist-item"><div class="check-box">&#9744;</div><div><strong>Establecer vigilancia regulatoria</strong> &mdash; Monitorizar publicacion de actos delegados, nuevas hTS, actualizaciones de la Candidate List SVHC y calendario de oleadas.</div></div>
 </div>
 </details>
 </section>
@@ -1095,7 +1108,7 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
     </div>
     <div class="tl-feature">
       <h4>Archivo inmutable 10+ anos</h4>
-      <p>Servicio cualificado de archivo electronico con conservacion LTV, renovacion automatica de firmas y SLA &ge;99,9%. Cumple incluso en caso de insolvencia.</p>
+      <p>Servicio cualificado de archivo electronico con conservacion LTV, renovacion automatica de firmas y SLA recomendado &ge;99,9%. Cumple incluso en caso de insolvencia.</p>
     </div>
     <div class="tl-feature">
       <h4>Trazabilidad y versionado</h4>
@@ -1148,15 +1161,15 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 
 <div class="faq-item">
   <div class="faq-q">Es obligatoria ya la DdPC?</div>
-  <div class="faq-a">Si y no. El CPR 2024/3110 se aplica desde el 8 de enero de 2026, pero la DdPC solo es exigible para productos cuya norma armonizada revisada (hEN) haya sido publicada bajo el nuevo marco. Para productos que siguen con hEN del CPR 305/2011, se mantiene la DdP. Sin embargo, la transicion esta en marcha y las familias de Oleada 1 (hormigon, acero) son inminentes. La recomendacion es prepararse ahora.</div>
+  <div class="faq-a">Si y no. El CPR 2024/3110 se aplica desde el 8 de enero de 2026, pero la DdPC solo es exigible para productos cuya especificacion tecnica armonizada (hTS) revisada haya sido publicada bajo el nuevo marco. Para productos que siguen con hEN del CPR 305/2011, se mantiene la DdP. Sin embargo, la transicion esta en marcha y las familias de Oleada 1 (hormigon, acero) son inminentes. La recomendacion es prepararse ahora.</div>
 </div>
 <div class="faq-item">
   <div class="faq-q">Puedo seguir usando mi DdP actual?</div>
-  <div class="faq-a">Si, mientras tu producto este cubierto por una hEN del CPR 305/2011 que no haya sido sustituida. Pero tu DdP no cumple los nuevos requisitos (conformidad art. 7, ambientales, REACH, machine-readable). Cuando se publique la nueva hEN para tu familia, tendras un plazo de transicion para migrar. Si no estas preparado, ese plazo sera insuficiente.</div>
+  <div class="faq-a">Si, mientras tu producto este cubierto por una hEN del CPR 305/2011 que no haya sido sustituida. Pero tu DdP no cumple los nuevos requisitos (conformidad art. 7, ambientales, REACH, machine-readable). Cuando se publique la nueva hTS para tu familia, tendras un plazo de transicion para migrar. Si no estas preparado, ese plazo sera insuficiente.</div>
 </div>
 <div class="faq-item">
   <div class="faq-q">Que pasa si no tengo DAP / datos de GWP?</div>
-  <div class="faq-a">La Fase 1 del Anexo II (GWP) es obligatoria desde enero 2026 para productos con nueva hEN. Si no tienes DAP, debes iniciar el proceso con un programa reconocido (EPD International, IBU, GlobalEPD, DAPcons). El proceso completo (ACV + verificacion + publicacion) tarda 3-6 meses. Mientras, se puede usar datos worst-case o promedios sectoriales como punto de partida, pero el ON los validara bajo EVCP 3+.</div>
+  <div class="faq-a">La Fase 1 del Anexo II (GWP, letras a&ndash;d) es exigible desde el 8 de enero de 2026 para productos cubiertos por una hTS revisada bajo el nuevo CPR. Si no tienes DAP, debes iniciar el proceso con un programa reconocido (EPD International, IBU, GlobalEPD, DAPcons). El proceso completo (ACV + verificacion + publicacion) tarda 3-6 meses. Mientras, se puede usar datos worst-case o promedios sectoriales como punto de partida, pero el ON los validara bajo EVCP 3+.</div>
 </div>
 <div class="faq-item">
   <div class="faq-q">Cual es la diferencia entre DdPC y DPP?</div>
@@ -1172,72 +1185,4 @@ details.acc-fam > *:not(summary) { padding:0 20px 16px 20px; }
 </div>
 <div class="faq-item">
   <div class="faq-q">Que regimen sancionador se aplica?</div>
-  <div class="faq-a">El <strong>art. 92 del CPR 2024/3110</strong> exige a los Estados miembros establecer sanciones <em>efectivas, proporcionales y disuasorias</em>, notificarlas a la Comision antes del 8 de diciembre de 2026, y aplicarlas desde el 8 de enero de 2027. En Espana, la transposicion se apoya en la <strong>Ley 21/1992 de Industria (Titulo V, arts. 30-38)</strong>: leves hasta 60.000 EUR, graves hasta 6.000.000 EUR, muy graves hasta 100.000.000 EUR. Ademas: cierre del establecimiento hasta 5 anos y prohibicion de contratar con AA.PP. hasta 5 anos en infracciones muy graves. Las sanciones aplican desde el 8 de enero de 2027.</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Mi producto se usa en otros sectores (no solo construccion). Se aplica el ESPR tambien?</div>
-  <div class="faq-a">Potencialmente si. El ESPR (UE) 2024/1781 es el reglamento marco general del DPP europeo. Para productos de construccion, el CPR tiene prioridad, pero comparten el registro central y los principios de acceso. Si tu producto se usa tambien en maquinaria, mobiliario, etc., ambos reglamentos pueden aplicar simultaneamente.</div>
-</div>
-<div class="faq-item">
-  <div class="faq-q">Cuanto cuesta cumplir?</div>
-  <div class="faq-a">Depende del tamano y la madurez de datos. Orientativamente: PYME pequena 15.000-50.000 EUR (proyecto + primer ano), PYME mediana 50.000-150.000 EUR, gran empresa 150.000-500.000 EUR. Esto no incluye ACV/DAP ni costes de ON, que son partidas separadas. Ver seccion 11 para desglose detallado.</div>
-</div>
-</section>
-
-<!-- ============ 15. ENLACES ============ -->
-<section id="enlaces" class="sec-coll">
-<details open>
-<summary><h2>15. Enlaces y recursos</h2></summary>
-
-<div class="link-group">
-  <h4><span class="tag tag-ley">LEY</span> Legislacion europea</h4>
-  <a class="link-item link-ley" href="https://eur-lex.europa.eu/eli/reg/2024/3110" target="_blank">CPR 2024/3110 (EUR-Lex)</a>
-  <a class="link-item link-ley" href="https://eur-lex.europa.eu/eli/reg/2024/1781" target="_blank">ESPR 2024/1781 (EUR-Lex)</a>
-  <a class="link-item link-ley" href="https://eur-lex.europa.eu/legal-content/ES/TXT/?uri=COM:2025:772:FIN" target="_blank">Plan de Trabajo COM(2025) 772</a>
-  <a class="link-item link-ley" href="https://eur-lex.europa.eu/eli/reg_del/2024/2769" target="_blank">Reg. Delegado 2024/2769 (EVCP 3+)</a>
-  <a class="link-item link-ley" href="https://eur-lex.europa.eu/eli/reg/2024/1183" target="_blank">eIDAS 2 (2024/1183)</a>
-</div>
-
-<div class="link-group">
-  <h4><span class="tag tag-ley">LEY</span> Legislacion espanola</h4>
-  <a class="link-item link-ley" href="https://www.boe.es/eli/es/rd/2006/03/17/314" target="_blank">CTE &mdash; RD 314/2006</a>
-  <a class="link-item link-ley" href="https://www.boe.es/eli/es/rd/2021/06/29/470" target="_blank">Codigo Estructural &mdash; RD 470/2021</a>
-  <a class="link-item link-ley" href="https://www.boe.es/buscar/act.php?id=BOE-A-1992-17363" target="_blank">Ley 21/1992 de Industria</a>
-  <a class="link-item link-ley" href="https://eur-lex.europa.eu/eli/reg/2006/1907" target="_blank">REACH &mdash; Reg. 1907/2006</a>
-  <a class="link-item link-ley" href="https://eur-lex.europa.eu/eli/reg/2008/1272" target="_blank">CLP &mdash; Reg. 1272/2008</a>
-</div>
-
-<div class="link-group">
-  <h4><span class="tag tag-guia">GUIA</span> Guias tecnicas y estandares</h4>
-  <a class="link-item link-guia" href="https://www.epdguide.org" target="_blank">EPD Guide</a>
-  <a class="link-item link-guia" href="https://www.oneclicklca.com" target="_blank">One Click LCA</a>
-  <a class="link-item link-guia" href="https://www.gs1.org/standards/gs1-digital-link" target="_blank">GS1 Digital Link</a>
-  <a class="link-item link-guia" href="https://www.eclass.eu" target="_blank">ECLASS &mdash; clasificacion productos</a>
-  <a class="link-item link-guia" href="https://www.en-standard.eu/une-en-15804-2012-a2-2019/" target="_blank">EN 15804+A2 (ACV productos construccion)</a>
-  <a class="link-item link-guia" href="https://www.en-standard.eu/une-41316-2020/" target="_blank">UNE 41316:2020 (Smart CE marking XML)</a>
-</div>
-
-<div class="link-group">
-  <h4><span class="tag tag-ext">EXT</span> Recursos Code Contract</h4>
-  <a class="link-item link-ext" href="https://codecontract.io" target="_blank">codecontract.io</a>
-  <a class="link-item link-ext" href="https://codecontract.io/trackline" target="_blank">Trackline plataforma DdPC/DPP</a>
-  <a class="link-item link-ext" href="mailto:eduardo@codecontract.io">eduardo@codecontract.io</a>
-</div>
-
-</details>
-</section>
-
-</div>
-<!-- /container -->
-
-<!-- ============ FOOTER ============ -->
-<footer class="site-footer">
-<div class="container">
-  <p><strong>Guia DdPC Digital v5.0</strong> &mdash; 29 abril 2026</p>
-  <p>Documento elaborado por <a href="https://codecontract.io" target="_blank">Code Contract</a> &middot; Contacto: <a href="mailto:eduardo@codecontract.io">eduardo@codecontract.io</a></p>
-  <p style="font-size:0.85em;opacity:0.75;margin-top:12px;">Esta guia tiene caracter informativo y orientativo. No sustituye al texto oficial del Reglamento (UE) 2024/3110, las hTS publicadas por la Comision Europea, ni el asesoramiento juridico/tecnico especializado.</p>
-</div>
-</footer>
-
-</body>
-</html>
+  <div class="faq-a">El <strong>art. 92 del CPR 2024/3110</strong> exige a los Estados miembros establecer sanciones <em>efectivas, proporcionales y disuasorias</em>, notificarlas a la Comision antes del 8 de diciembre de 2026, y aplicarlas desde el 8 de ene
